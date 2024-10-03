@@ -1,0 +1,514 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Enrollment Form</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <link href="{% static 'asset/assets/img/CK-Edge-logo.png' %}" rel="icon">
+  <link href="{% static 'asset/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/quill/quill.snow.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/simple-datatables/style.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/css/style.css' %}" rel="stylesheet">
+
+  <style>
+    #footbottom{
+      min-height:100vh !important ;
+      display:flex !important ;
+      flex-direction:column !important ;
+      justify-content:space-between !important ;
+    }
+    #c1,#a1,#b1,#j1,#k,#l{
+      color:#012970
+    }
+    *{
+      font-size:small !important;
+    }
+ </style>
+</head>
+
+<body>
+  <div id="footbottom">
+  <!-- ======= Header ======= -->
+  {% include 'include/header.html'%}
+
+  <!-- ======= Sidebar ======= -->
+  {% include 'include/sidebar.html'%}
+  <!-- End Sidebar-->
+
+  <main id="main" class="main">
+    <div class="pagetitle">
+      <h1>Enrollment</h1>
+    </div><!-- End Page Title -->
+    {% for a in a1 %}
+    <div class="col-md-10">
+      <form id="formid1" >{% csrf_token %}
+        <div class="mb-3 ">
+          <input type="text" class="form-control" id="id1"  aria-describedby="emailHelp" name="id" hidden value="{{ a.id }}">
+        </div>
+        <div class="card  mb-3" style="max-width: 30rem;" id="c1">
+          <div class="card-body " >
+            <h5 class="card-title fw-bold">Candidate</h5>
+            <div class="row ">
+              <div class="col-md-3  label fw-bold" id="c1">Name</div>
+              <div class="col-md-6 "   >{{ a.candid_name }}</div>
+            </div>
+            <div class="row ">
+              <div class="col-md-3 label fw-bold " id="a1">Course</div>
+              <div class="col-md-6"  >{{ a.acourse_id__cname }}</div>
+            </div>
+            <div class="row ">
+              <div class="col-md-3  label fw-bold " id="b1">Location</div>
+              <div class="col-md-3 "   >{{ a.Location  }}</div>
+            </div>
+            <div class="row ">
+              <div class="col-md-3  label fw-bold"  id="j1">Email</div>
+              <div class="col-md-6 " >{{ a.email  }}</div>
+            </div>
+            <div class="row ">
+              <div class="col-md-3  label fw-bold" id="k" >price</div>
+              <div class="col-md-6 " id="pri" >{{ a.acourse_id__cprice   }}</div>
+            </div>
+            <div class="row " hidden>
+              <div class="col-md-3  label fw-bold" id="l"  >Duration</div>
+              <div class="col-md-6 " id="dur1">{{ a.acourse_id__cduration   }}</div>
+            </div>
+          </div>
+        </div>
+    <!-- </div> -->
+        <div class="card  mb-3" style="max-width: 30rem;" id="d1">
+          <div class="card-body " >
+            <h5 class="card-title fw-bold">Discount</h5>
+            <div class="col-sm-12">
+              <p><b>Do you want to add discount?</b></p>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="chkstock" value="option1">
+                <label class="form-check-label" for="inlineRadio1">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="noo" value="no1">
+                <label class="form-check-label" for="inlineRadio2" id="no">No</label>
+              </div><br>
+              <div id="dvstock" class="row" style="display: none">
+                <div class="col-sm-3">
+                  <label for="exampleInputEmail1" class="form-label fw-bold">Discount <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control " id="txtstock" min="0" max="50"  placeholder="Discount" aria-describedby="emailHelp" name="txtstock" oninput="dd(this)">
+                </div>
+                <div class="col-sm-5">
+                  <label for="exampleInputEmail1" class="form-label fw-bold">Dis_Amount</label>
+                  <input type="text" class="form-control " id="dis_amt" min="0" max="50"  placeholder="Dis_Amount" aria-describedby="emailHelp" name="dis_amt" oninput="dd(this)">
+                </div>
+                <div class="col-sm-4">
+                  <label for="exampleInputEmail1" class="form-label fw-bold">Price</label>
+                  <input type="text" class="form-control " id="disprice1"  placeholder="price"   aria-describedby="emailHelp" name="disprice1" oninput="dd(this)">
+                </div>
+              </div>
+              <a role="button" class="btn btn-success btn-sm text-white mt-2" onclick="nex()" id="nexx">Next</a>
+              <a role="button" class="btn btn-success btn-sm text-white mt-2" onclick="nex1()" id="nexx1">Next</a>
+            </div>
+          </div>
+        </div>
+        <div id="px1">
+          <div id="pp1">
+            <div class="card  mb-3" id="" style="max-width: 30rem;">
+              <div class="card-body py-2">
+                <div class="row">
+                  <div class="col-md-6  label fw-bold" id="k" >Course Price</div>
+                  <div class="col-md-3 " id="q1"  ></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6  label fw-bold" id="k" >Course Duration</div>
+                  <div class="col-md-3 " id="dur" ></div>
+                </div>
+                <div id="dis_s">
+                  <div class="row">
+                    <div class="col-md-6  label fw-bold" id="k" >Discount</div>
+                    <div class="col-md-3 " id="z1" ></div>
+                  </div>
+                  <div class="row ">
+                    <div class="col-md-6  label fw-bold" id="l">Discounted price</div>
+                    <div class="col-md-3 " id="z2"></div>
+                  </div>
+                </div>
+                <div class="row ">
+                  <div class="col-md-6  label fw-bold" id="l">GST</div>
+                  <div class="col-md-3 " id="gst"></div>
+                </div>
+                <div class="row ">
+                  <div class="col-md-6  label fw-bold" id="l">GST Price</div>
+                  <div class="col-md-3 " id="gst_p"></div>
+                </div>
+                <div class="row ">
+                  <div class="col-md-6  label fw-bold" id="l">Total Amount</div>
+                  <div class="col-md-3 " id="tot_amt"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-5">
+            <div class="mb-3 col-md-4">
+              <label for="inputState" class="form-label  fw-bold">Payment Type <span class="text-danger">*</span></label>
+              <select id="m1" class="form-select role" name="m2" oninput="changeFunc();" required readonly>
+                <option value="" disabled selected >Select</option>
+                <option  value="Monthly Payment">Monthly Payment</option>
+                <option  value="Full Payment">Full Payment</option>
+              </select>
+            </div>
+            <div class="mb-3 col-md-4">
+              <label for="inputState" class="form-label  fw-bold">Payment Mode <span class="text-danger">*</span></label>
+              <select id="n1" class="form-select role" name="n2" required >
+                <option  value="" disabled selected >Select</option>
+                <option value="Cash">Cash</option>
+                <option value="UPI">UPI ID</option>
+                <option value="Account Transfer">Account Transfer</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="mb-3 col-md-4">
+              <label for="exampleInputPassword1" class="form-label fw-bold">Amount</label>
+              <input type="text" class="form-control" id="o1" name="o2" value=""  oninput="changeFunc();"  required>
+              <input type="hidden" class="form-control" id="q2" name="q2" value=""  required>
+            </div>
+            <div class="mb-3 col-md-4">
+              <label for="exampleInputPassword1" class="form-label fw-bold">GST Amount</label>
+              <input type="text"  class="form-control" id="gst_amt"  rows="1"  aria-describedby="emailHelp" name="gst_amt">
+              <input type="hidden"  class="form-control" id="total_gst"  rows="1"  aria-describedby="emailHelp" name="total_gst">
+            </div>
+          </div>
+          <div class="row">
+            <div class="mb-3 col-md-4">
+              <label for="exampleInputPassword1" class="form-label fw-bold">Final Amount</label>
+              <input type="text" class="form-control" id="final_p" name="final_p" value=""  oninput="changeFunc();"  required>
+            </div>
+            <div class="mb-3  col-md-4">
+              <label for="exampleInputEmail1" class="form-label fw-bold">Balance Amount</label>
+              <input type="number" class="form-control" id="r1"  aria-describedby="emailHelp" name="r2" readonly>
+            </div>
+          </div>
+          <div class="row">
+            <div class="mb-3 col-md-4">
+              <label for="exampleInputEmail1" class="form-label fw-bold"> Candidate Enrollment No<span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="candid_no" aria-describedby="emailHelp" name="candid_no" maxlength = "15">
+            </div>
+            <div class="mb-3 col-md-4">
+              <label for="exampleInputPassword1" class="form-label fw-bold">Remark</label>
+              <textarea  class="form-control" id="p1"  rows="1"  aria-describedby="emailHelp" name="p2"></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="mb-3 col-md-4">
+              <input type="button" id="update" class="btn btn-primary  mt-3 " value="Submit">
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="row">
+          <div class="alert alert-success alert-dismissible fade show w-50 " id="alert1" style="display:none;" role="alert" >
+            <i class="bi bi-check-circle me-1 "></i>
+            successfully Reciept sended !
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          <div class="col-md-12 ">
+            <div class="spinner-border text-primary" style="display:none;" id="loadd">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+          {% endfor %}
+      </div>
+      <!--add emp form-->
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  {% include 'include/footer.html'%}
+  <!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'asset/assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/chart.js/chart.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/echarts/echarts.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/quill/quill.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/simple-datatables/simple-datatables.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/tinymce/tinymce.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'asset/assets/js/main.js' %}"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+  <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js" defer></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</div>
+</body>
+<script>
+//update payslip
+$('#update').click(function(e){
+      $m1 = $('#m1').val();
+      $n1 = $('#n1').val();
+      $o1 = $('#o1').val();
+      $candid_no = $('#candid_no').val();
+      if(  !$('#m1').val() | !$('#n1').val() | $o1=="" | $candid_no=="" )
+        {
+          swal("Please complete all * field","failed",{icon: 'error'});
+        }
+      else
+        {
+          e.preventDefault();
+          var formData = new FormData($('#formid1')[0]);
+          $('#update').hide();
+          $('#loadd').show();
+          $.ajax({
+            url:'/update_enroll ',
+            method:"POST",
+            data:formData,
+            contentType:false,
+            processData:false,
+            dataType:'JSON',
+            success:function(data){
+             data1=data.status
+             if(data1=='Success'){
+                  $('#loadd').hide();
+                  $('#update').show();
+                  $("#formid1")[0].reset();
+                  $('#alert1').show(0).delay(2000).hide(0);
+                  window.location.href = "/enroll";
+                  }
+             else
+                  {
+                  swal("details failed to inserted!!",{icon: 'error'});
+                  window.location.href = "/index";
+                  }
+            },
+            error:function(error){
+              alert(' update fail ')
+            }
+          });
+        }
+
+});
+$(document).ready(function(){
+  $('#c1,#d1,#nexx').show();
+  $('#px1,#nexx1').hide();
+});
+
+function nex(){
+  x=$('#txtstock').val();
+  y=$('#disprice1').val();
+  if(x!=''&y!=''){
+    $('#c1,#d1').hide();
+    $('#px1').show();
+    id=$('#id1').val();
+    x=$('#txtstock').val();
+    y=$('#disprice1').val();
+  }
+  else if(!$("input[name='inlineRadioOptions']:checked").val()){
+      swal("Please select yes or no",{icon: 'error'});
+    }
+  else if($("input[name='inlineRadioOptions']:checked").val() == 'option1'){
+       if(x==''){
+        swal("Please enter discount",{icon: 'error'});
+       }
+    }
+  $.ajax({
+    url:"/paydetailss",
+    type:"POST",
+    data:{"id":id,"x":x,"y":y,csrfmiddlewaretoken:"{{ csrf_token }}"},
+    dataType:'json',
+    success:function(data){
+      $('#z1').text(data.user['x1']+'%');
+      $('#z2').text(data.user['y1']);
+      $('#gst').text(data.user['gst_val']+'%');
+      var dis_p=data.user['y1'];
+      var gst=data.user['gst_val'];
+      var gst_p=((dis_p/100)*gst).toFixed(2);
+      $('#gst_p').text(gst_p);
+      $('#total_gst').val(gst_p);
+      var tot_gst=$('#total_gst').val();
+      var tot_amt=(parseFloat(dis_p)+parseFloat(tot_gst)).toFixed(2);
+      $('#tot_amt').text(tot_amt);
+      $('#q1').text(data.user['amt']);
+      $('#q2').val(data.user['amt']);
+      $('#dur').text(data.user['dur']);
+    }
+
+  })
+}
+
+function nex1(){
+    $('#c1,#d1').hide();
+    $('#px1').show();
+    id=$('#id1').val();
+    x=$('#txtstock').val();
+    y=$('#disprice1').val();
+    $.ajax({
+    url:"/paydetailss",
+    type:"POST",
+    data:{"id":id,"x":x,"y":y,csrfmiddlewaretoken:"{{ csrf_token }}"},
+    dataType:'json',
+    success:function(data){
+      $('#z1').text(data.user['x1']);
+      $('#z2').text(data.user['y1']);
+      $('#gst').text(data.user['gst_val']+'%');
+      var dis_p=$('#z2').text();
+      var gst=data.user['gst_val'];
+      var amt=data.user['amt'];
+      var gst_p=((amt/100)*gst).toFixed(2);
+      $('#gst_p').text(gst_p);
+      $('#total_gst').val(gst_p);
+      var tot_gst=$('#total_gst').val();
+      var tot_amt=(parseFloat(amt)+parseFloat(tot_gst)).toFixed(2);
+      $('#tot_amt').text(tot_amt);
+      $('#q1').text(amt);
+      $('#q2').val(amt);
+      $('#dur').text(data.user['dur']);
+
+    }
+
+  })
+}
+
+function changeFunc() {
+
+    var selectBox = document.getElementById("m1");
+    var id =  $('#m1').val();
+    if(id =="Monthly Payment"){
+      var disco=$('#disprice1').val()
+
+      if(disco){
+        d=$('#dur').text();
+        b=$('#disprice1').val();
+        c=b/d;
+        gst_p=$('#gst_p').text();
+        gst_m=(gst_p/d).toFixed(2);
+        var gst1=$('#gst_amt').val(gst_m);
+        var gst2=$('#gst_amt').val();
+        var ro=(c).toFixed(2);
+        var amt2=$('#o1').val(ro);
+        var amm2=$('#o1').val();
+        var blc=b-amm2;
+        var final=(parseFloat(gst2)+parseFloat(amm2)).toFixed(2);
+        $('#final_p').val(final);
+        var total=(parseFloat(b)+parseFloat(gst_p)).toFixed(2)
+        var amnt_b=(total-final).toFixed(2);
+        $('#r1').val(amnt_b);
+      }
+      else{
+        a=$('#pri').text();
+        d=$('#dur').text();
+        mont=a/d;
+        var ro=(mont).toFixed(2);
+        var amt3=$('#o1').val(ro);
+        var amm3=$('#o1').val();
+        var gst_p=$('#total_gst').val();
+        var gst1=(gst_p/d).toFixed(2);
+        $('#gst_amt').val(gst1);
+        var gst2=$('#gst_amt').val();
+        var final=(parseFloat(gst2)+parseFloat(amm3)).toFixed(2);
+        $('#final_p').val(final);
+        var total=(parseFloat(a)+parseFloat(gst_p)).toFixed(2);
+        var amnt_b=(total-final).toFixed(2);
+        $('#r1').val(amnt_b);
+      }
+    }
+    else if(id =="Full Payment"){
+      disco=$('#disprice1').val();
+      if(disco){
+        d=$('#disprice1').val();
+        gst_p=$('#gst_p').text();
+        var gst1=$('#gst_amt').val(gst_p);
+        var gst2=$('#gst_amt').val();
+        var final=(parseFloat(gst2)+parseFloat(d)).toFixed(2);
+        $('#final_p').val(final);
+        var amt4=$('#o1').val(d);
+        var amm=$('#o1').val();
+        var blc=(d-amm).toFixed(2);
+        $('#r1').val(blc);
+      }
+      else{
+        var gst_p=$('#total_gst').val();
+        $('#gst_amt').val(gst_p);
+        a=$('#pri').text();
+        var amt5=$('#o1').val(a);
+        var amm=$('#o1').val();
+        var gst2=$('#gst_amt').val();
+        var final=(parseFloat(gst2)+parseFloat(amm)).toFixed(2);
+        $('#final_p').val(final);
+        var total=(parseFloat(a)+parseFloat(gst_p)).toFixed(2)
+        var amnt_b=(total-final).toFixed(2);
+        $('#r1').val(amnt_b);
+      }
+
+    }
+    else{
+      disco=$('#disprice1').val();
+      if(disco){
+        d=$('#disprice1').val();
+        var amm6=$('#o1').val();
+        var blc=d-amm6;
+        $('#r1').val(blc);
+      }
+      else{
+        a=$('#pri').text();
+        var amm7=$('#o1').val();
+        var blc=a-amm7;
+        $('#r1').val(blc);
+      }
+
+    }
+  }
+
+  $("#chkstock").click(function () {
+    $("#nexx").show();
+    $("#nexx1").hide();
+
+ if ($(this).is(":checked")) {
+
+    $("#dvstock").show();
+ } else {
+    $("#dvstock").hide();
+
+}
+
+});
+
+$("#noo").click(function () {
+    $("#nexx").hide();
+    $("#nexx1").show();
+
+   if ($(this).is(":checked")) {
+
+      $("#dvstock").hide();
+      $('#pp1').show();
+      $('#dis_s').hide();
+
+   }
+  });
+
+
+function dd(){
+  var dis=($('#txtstock').val()/100);
+  var pri=$('#pri').text();
+  var dprice=pri-(dis*pri);
+  var d_price=pri-dprice
+  var val=(dprice).toFixed(2);
+  var val2=(d_price).toFixed(2);
+  $('#disprice1').val(val);
+  $('#dis_amt').val(val2);
+}
+</script>
+</html>

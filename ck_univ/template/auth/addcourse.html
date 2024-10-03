@@ -1,0 +1,191 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Add course</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <link href="{% static 'asset/assets/img/CK-Edge-logo.png' %}" rel="icon">
+  <link href="{% static 'asset/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/quill/quill.snow.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/simple-datatables/style.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/css/style.css' %}" rel="stylesheet">
+
+  <style>
+    #footbottom{
+      min-height:100vh !important ;
+      display:flex !important ;
+      flex-direction:column !important ;
+      justify-content:space-between !important ;
+    }
+    *{
+      font-size:small !important;
+    }
+ </style>
+</head>
+
+<body>
+   <div id="footbottom">
+  <!-- ======= Header ======= -->
+  {% include 'include/header.html'%}
+
+  <!-- ======= Sidebar ======= -->
+  {% include 'include/sidebar.html'%}
+  <!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Course Details </h1>
+
+    </div><!-- End Page Title -->
+
+
+
+<div class="col-md-10">
+        <form id="formid1"  data-toggle="validator"  >{% csrf_token %}
+            <div class="row">
+            <div class="mb-3 col-md-4">
+                <label for="inputState" class="form-label  fw-bold">Course name*</label>
+                <input type="text" class="form-control" id="c1"  aria-describedby="emailHelp" name="c2"  >
+              </div>
+              <div class="mb-3 col-md-4">
+                <label for="exampleInputEmail1" class="form-label fw-bold">Course Details*</label>
+                <textarea  class="form-control" id="d1" rows="1" aria-describedby="emailHelp" name="d2"></textarea>
+              </div>
+        </div>
+        <div class="row">
+          <div class="mb-3 col-md-4">
+              <label for="inputState" class="form-label  fw-bold">Course Duration*</label>
+              <select id="e1" class="form-select role" name="e2"  >
+                <option value="" disabled selected>select </option>
+                <option value="1" >1 month</option>
+                <option value="2" >2 month</option>
+                <option value="3" >3 month</option>
+                <option value="4" >4 month</option>
+                <option value="5" >5 month</option>
+                <option value="6" >6 month</option>
+              </select>
+            </div>
+            <div class="mb-3 col-md-4">
+              <label for="inputState" class="form-label  fw-bold">Course Price*</label>
+              <input type="text" class="form-control" onkeypress="return isNumber(event);" id="f1"  aria-describedby="emailHelp" name="f2"  >
+            </div>
+      </div>
+      <div class="row">
+        <div class="mb-3 col-md-4">
+          <label for="inputState" class="form-label  fw-bold">GST%*</label>
+          <input type="text" class="form-control" readonly value="18" id="g1"  aria-describedby="emailHelp" name="g2"  >
+        </div>
+      </div>
+      </div>
+      <div class="alert alert-success alert-dismissible fade show w-25 " id="alert1" style="display:none;" role="alert" >
+        <i class="bi bi-check-circle me-1 "></i>
+       successfully added!
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+
+<div class="col-md-12">
+ <input type="button" id="save1" class="btn btn-primary  mt-5  "  value="Submit">
+</div>
+</div>
+      <!--add emp form-->
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--end-->
+     <!--card -->
+
+    </div>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  {% include 'include/footer.html'%}
+  <!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'asset/assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/chart.js/chart.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/echarts/echarts.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/quill/quill.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/simple-datatables/simple-datatables.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/tinymce/tinymce.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'asset/assets/js/main.js' %}"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+  <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js" defer></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</div>
+</body>
+<script>
+
+function isNumber(evt) {
+  evt = (evt) ? evt : window.event;
+  var charCode = (evt.which) ? evt.which : evt.keyCode;
+  if (charCode > 31 && (charCode < 48 || charCode > 57))
+    {
+      return false;
+  }  return true;
+}
+
+//insert enquiries form
+  $('#save1').click(function(e){
+          $a1 = $('#c1').val();
+          $b1 = $('#d1').val();
+          $d1 = $('#f1').val();
+          $e1 = $('#e1').val();
+          $g1 = $('#g1').val();
+      if(  $a1== "" |  $b1=="" | $d1=="" |!$('#e1').val() || $g1=="" )
+        {
+          swal("Please complete all * field","failed",{icon: 'error'});
+        }
+      else{
+
+          e.preventDefault();
+          var formData = new FormData($('#formid1')[0]);
+          $.ajax({
+            url:'/addcour',
+            type:'POST',
+            data:formData,
+            contentType:false,
+            processData:false,
+            dataType:'JSON',
+            success:function(data){
+              data1=data.status
+              if(data1=='Success'){
+                // swal("Course Added Successfully!!", "success");
+                $("#formid1")[0].reset();
+                $('#alert1').show(0).delay(2000).hide(0);
+                }
+                else
+                {
+                swal("Failed To Inserted!!", "failed",{icon: 'error'});
+                }
+            }
+  });
+}
+});
+</script>
+</html>

@@ -1,0 +1,346 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Enrollment Form</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+    <link href="{% static 'asset/assets/img/CK-Edge-logo.png' %}" rel="icon">
+  <link href="{% static 'asset/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/quill/quill.snow.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/simple-datatables/style.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/css/style.css' %}" rel="stylesheet">
+
+  <style>
+    *{
+      font-size:small !important;
+    }
+    #footbottom{
+      min-height:100vh !important ;
+      display:flex !important ;
+      flex-direction:column !important ;
+      justify-content:space-between !important ;
+    }
+ </style>
+</head>
+
+<body>
+   <div id="footbottom">
+  <!-- ======= Header ======= -->
+  {% include 'include/header.html'%}
+
+  <!-- ======= Sidebar ======= -->
+  {% include 'include/sidebar.html'%}
+  <!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Monthly Payment</h1>
+
+    </div><!-- End Page Title -->
+<div class="col-md-10 mt-1">
+  <form id="formid2" >{% csrf_token %}
+            <div class="mb-1 ">
+              <input type="text" class="form-control" id="id1"  aria-describedby="emailHelp" name="id" value="{{ a1.id}}" hidden >
+            </div>
+            <div class="card  mb-1" style="max-width: 30rem;">
+              <div class="card-body " >
+                <div class="row">
+                  <div class="col-md-8">
+                    <h5 class="card-title fw-bold">Candidate</h5>
+                  </div>
+                  <div class="col-md-4 floa-end">
+                    <h5 class="card-title fw-bold" id="cal_months"></h5>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 label fw-bold ">Name</div>
+                  <div class="col-md-3"  id="cname">{{a1.candid_name}}</div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 label fw-bold">Course Price</div>
+                  <div class="col-md-3"  id="cprice">{{dur.cprice}}</div>
+                </div>
+                <div class="row ">
+                  <div class="col-md-6  label fw-bold">Duration</div>
+                  <div class="col-md-3 " id="dur">{{a2}}</div>
+                </div>
+                {% if a1.discount is not None %}
+                <div class="row">
+                  <div class="col-md-6 label fw-bold">Discount</div>
+                  <div class="col-md-3"  id="dis_pp">{{a1.discount}}%</div>
+                </div>
+                <div class="row ">
+                  <div class="col-md-6  label fw-bold">Discount price</div>
+                  <div class="col-md-3 " id="dis_p"  >{{a1.dis_price}}</div>
+                </div>
+                {% endif %}
+                <div class="row ">
+                  <div class="col-md-6  label fw-bold">GST</div>
+                  <div class="col-md-3 " id="cgst">{{a1.cgst}}</div>
+                </div>
+                <div class="row ">
+                  <div class="col-md-6  label fw-bold">GST Price</div>
+                  <div class="col-md-3 " id="gst_p">{{gst_p}}</div>
+                </div>
+                <div class="row ">
+                  <div class="col-md-6  label fw-bold">Total Price with GST</div>
+                  <div class="col-md-3 " id="q1"  >{{ total }}</div>
+                </div>
+                <div class="row ">
+                  <div class="col-md-6  label fw-bold">Balance Price</div>
+                  <div class="col-md-3 " id="s1"  >{{a1.blc_amnt}}</div>
+                </div>
+             </div>
+            </div>
+                <div class="row mt-5">
+                    <div class="mb-3 col-md-4">
+                      <label for="inputState" class="form-label  fw-bold ">Payment type <span class="text-danger">*</span></label>
+                      <select id="m1" class="form-select role" name="m2" required   onchange="changeFunc();"   >
+                        <option  value="" disabled selected>select payment</option>
+                        <option value="Monthly Payment" >Monthly Payment</option>
+                        <option value="Full Payment" >Full Payment</option>
+                      </select>
+                    </div>
+                    <div class="mb-3 col-md-4">
+                      <label for="inputState" class="form-label  fw-bold ">Payment mode <span class="text-danger">*</span></label>
+                      <select id="n1" class="form-select role" name="n2" required>
+                        <option  value="" disabled selected>select mode</option>
+                        <option value="Cash" >Cash</option>
+                        <option value="UPI">UPI ID</option>
+                        <option value="Account Transfer">Account Transfer</option>
+                      </select>
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="mb-3  col-md-4">
+                    <label for="exampleInputEmail1" class="form-label fw-bold">Amount</label>
+                    <input type="number" class="form-control" id="o1"  aria-describedby="emailHelp" name="o2" required >
+                  </div>
+                  <div class="mb-3  col-md-4">
+                    <label for="exampleInputEmail1" class="form-label fw-bold">GST Amount</label>
+                    <input type="number" class="form-control" id="gst_amt"  aria-describedby="emailHelp" name="gst_amt" value="" >
+                  </div>
+                </div>
+                 <div class="row">
+                      <div class="mb-3  col-md-4">
+                        <label for="exampleInputEmail1" class="form-label fw-bold">Paid Amount</label>
+                        <input type="number" class="form-control" id="final_p"  aria-describedby="emailHelp" name="final_p" required >
+                      </div>
+                      <div class="mb-3  col-md-4">
+                        <label for="exampleInputEmail1" class="form-label fw-bold">Balance Amount</label>
+                        <input type="number" class="form-control" id="r1"  aria-describedby="emailHelp" name="r2" value="" >
+                      </div>
+                </div>
+    </form>
+                <div class="alert alert-success alert-dismissible fade show w-25 " id="alert1" style="display:none;" role="alert" >
+                    <i class="bi bi-check-circle me-1 "></i>
+                    paid successfully!
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div class="col-md-12 ">
+                    <input type="submit" id="save1" class="btn btn-primary  mt-3  " value="Submit">
+                </div>
+                <div class="spinner-border text-primary" style="display:none;" id="loadd">
+                  <span class="sr-only">Loading...</span>
+                </div>
+</div>
+      <!--add emp form-->
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--end-->
+     <!--card -->
+
+    </div>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  {% include 'include/footer.html'%}
+  <!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'asset/assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/chart.js/chart.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/echarts/echarts.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/quill/quill.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/simple-datatables/simple-datatables.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/tinymce/tinymce.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'asset/assets/js/main.js' %}"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+  <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js" defer></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</div>
+</body>
+<script>
+  $(document).ready(function(){
+  var id=$("#id1").val()
+ $.ajax({
+  url:"/cal_month",
+  type:'POST',
+  data:{'id':id,csrfmiddlewaretoken:"{{ csrf_token }}"},
+  dataType:'json',
+  success:function(data){
+    $("#cal_months").text(data['a']+' Month ')
+  }
+
+
+ })
+
+});
+
+//insert
+$('#save1').click(function(e){
+  if(!$('#m1').val() || !$('#n1').val()){
+    swal("Please filled (*)required field",{icon: 'error'});
+  }
+  else{
+    e.preventDefault();
+    var formData = new FormData($('#formid2')[0]);
+    $('#save1').hide();
+    $('#loadd').show();
+    $.ajax({
+      url:'{% url "pendding" %}',
+      type:'POST',
+      data:formData,
+      contentType:false,
+      processData:false,
+      dataType:'JSON',
+      success:function(data){
+        data1=data.status
+        if(data1=='success'){
+          $('#loadd').hide();
+          $('#save1').attr('disabled',true);
+          $("#formid2")[0].reset();
+          $('#alert1').show(0).delay(2000).hide(0);
+        }
+        else
+        {
+          swal("failed to inserted!!", "failed",{icon: 'error'});
+        }
+      }
+    });
+  }
+});
+
+//get dynamic course price
+function changeFunc() {
+    var id =  $('#m1').val()
+    if(id =="Monthly Payment") {
+      var a=$('#q1').text();
+      var dur=$('#dur').text();
+      var s1=$('#s1').text();
+      if(s1!=1){
+      c=a/dur;
+      // try
+      course_a=parseInt(a)-parseInt(s1);
+      gst=$('#gst_p').text();
+      b=(gst/dur).toFixed(2);
+      amt=(c-b).toFixed(2);
+      // amt=s1-b;
+      var cc=(a-gst)/dur;
+      var amt1=$('#o1').val(amt);
+      var amm1=$('#o1').val();
+      $('#gst_amt').val(b);
+      var gst1=$('#gst_amt').val();
+      if(Number.isInteger(amm1)== true && Number.isInteger(gst1)== true){
+         var final=(parseInt(amm1)+parseInt(gst1)).toFixed(2);
+      }
+      else if(Number.isInteger(amm1)== false && Number.isInteger(gst1)== true){
+        var final=(parseFloat(amm1)+parseInt(gst1)).toFixed(2);
+      }
+      else if(Number.isInteger(amm1)== true && Number.isInteger(gst1)== false){
+        var final=(parseInt(amm1)+parseFloat(gst1)).toFixed(2);
+      }
+      else{
+         var final=(parseFloat(amm1)+parseFloat(gst1)).toFixed(2);
+      }
+      $('#final_p').val(final);
+      var f= $('#final_p').val();
+      var blc=(s1-f).toFixed(2);
+      if(blc<1){
+         blc=0;
+      }
+      $('#r1').val(blc);
+    }
+    else{
+      var amt1=$('#o1').val(1);
+      $('#gst_amt').val(0);
+      var final=parseInt(1)+parseInt(0);
+      $('#final_p').val(final);
+      $('#r1').val(0);
+    }
+    }
+    else if (id =="Full Payment"){
+      var a=$('#q1').text();
+      var s1=$('#s1').text();
+      var dur=$('#dur').text();
+      if(s1!=1){
+      gst=$('#gst_p').text();
+      b=(gst/dur).toFixed(2);
+      d=gst-b;
+      amt=(s1-b).toFixed(2);
+      var amt1=$('#o1').val(amt);
+      var amm1=$('#o1').val();
+      $('#gst_amt').val(b);
+      var gst1=$('#gst_amt').val();
+      if(Number.isInteger(amm1)== true && Number.isInteger(gst1)== true){
+         var final=(parseInt(amm1)+parseInt(gst1)).toFixed(2);
+      }
+      else if(Number.isInteger(amm1)== false && Number.isInteger(gst1)== true){
+        var final=(parseFloat(amm1)+parseInt(gst1)).toFixed(2);
+      }
+      else if(Number.isInteger(amm1)== true && Number.isInteger(gst1)== false){
+        var final=(parseInt(amm1)+parseFloat(gst1)).toFixed(2);
+      }
+      else{
+         var final=(parseFloat(amm1)+parseFloat(gst1)).toFixed(2);
+      }
+      $('#final_p').val(final);
+      var f= $('#final_p').val();
+      var blc=(s1-f).toFixed(2);
+      if(blc<1){
+         blc=0;
+      }
+      $('#r1').val(blc);
+    }
+    else{
+      var amt1=$('#o1').val(1);
+      $('#gst_amt').val(0);
+      var final=parseInt(1)+parseInt(0);
+      $('#final_p').val(final);
+      $('#r1').val(0);
+    }
+    }
+    else{
+      var a=$('#q1').text()
+      var amm3=$('#o1').val();
+      var blc=a-amm3;
+      $('#r1').val(blc);
+    }
+  }
+
+</script>
+</html>

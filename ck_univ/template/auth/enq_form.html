@@ -1,0 +1,351 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Enquiry Form</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <link href="{% static 'asset/assets/img/CK-Edge-logo.png' %}" rel="icon">
+  <!-- <link href="{% static 'asset/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon"> -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/quill/quill.snow.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/simple-datatables/style.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/css/style.css' %}" rel="stylesheet">
+
+  <style>
+    #footbottom{
+      min-height:100vh !important ;
+      display:flex !important ;
+      flex-direction:column !important ;
+      justify-content:space-between !important ;
+    }
+     *{
+      font-size:small !important;
+    }
+ </style>
+</head>
+
+<body>
+  <div id="footbottom">
+  <!-- ======= Header ======= -->
+  {% include 'include/header.html'%}
+
+  <!-- ======= Sidebar ======= -->
+  {% include 'include/sidebar.html'%}
+  <!-- End Sidebar-->
+
+    <main id="main" class="main">
+      <div class="pagetitle">
+      </div><!-- End Page Title -->
+      <div class="card col-md-6">
+        <div class="card-body ">
+          <h1 class="card-title fw-bold">Enquiries</h1>
+          <!--<ul class="nav nav-tabs" id="myTab" role="tablist">-->
+            <!--<li class="nav-item" role="presentation">-->
+            <!--  <button class="nav-link active"  id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Single  Insert</button>-->
+            <!--</li>-->
+            <!--<li class="nav-item" role="presentation">-->
+            <!--  <button class="nav-link " id="profile-tab" data-bs-toggle="tab"  data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Bulk Insert</button>-->
+            <!--</li>-->
+          <!--</ul>-->
+          <div class="tab-content pt-2" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+              <div class="col-md-10">
+                <form id="formid1" >{% csrf_token %}
+                  <div class="mb-3 ">
+                    <input type="text" class="form-control" id="id1"  aria-describedby="emailHelp" name="id" hidden >
+                  </div>
+                  <div class="row">
+                    <div class="mb-3 col-md-6">
+                      <label for="inputState" class="form-label  fw-bold">Course name <span class="text-danger">*</span></label>
+                      <select id="a1" class="form-select role" name="a2" >
+                        <option value="" disabled selected>Select your course</option>
+                        {% for val in coursename %}
+                        <option value="{{val.id}}">{{val.cname}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <div class="mb-3 col-md-6">
+                      <label for="inputState" class="form-label  fw-bold">Location <span class="text-danger">*</span></label>
+                      <select id="b1" class="form-select role" name="b2">
+                        <option value="" disabled selected >Location...</option>
+                        {% for val in location %}
+                        <option value="{{val.loc_name}}">{{val.loc_name}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="mb-3 col-md-6">
+                      <label for="exampleInputEmail1" class="form-label fw-bold">Name <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="c1"  aria-describedby="emailHelp" name="c2" required>
+                    </div>
+                    <div class="mb-3 col-md-6">
+                      <label for="exampleInputPassword1" class="form-label fw-bold">Email <span class="text-danger">*</span></label>
+                      <input type="email" class="form-control" id="j1"  name="j2" required>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="mb-3 col-md-6">
+                      <label for="inputState" class="form-label  fw-bold">Qualification <span class="text-danger">*</span></label>
+                      <select id="d1" class="form-select role" name="d2" required>
+                        <option value="" disabled selected>Select </option>
+                        {% for val in quali %}
+                        <option value="{{val.qualification}}">{{val.qualification}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <div class="mb-3 col-md-6 ">
+                      <label for="exampleInputEmail1" class="form-label fw-bold">Completed Year <span class="text-danger">*</span></label>
+                      <input type="number" placeholder="YYYY" class="form-control" min="1999" max="2022" id="e1" name="e2"  required>
+                      <script>
+                          document.querySelector("input[type=number]")
+                          .oninput = e => console.log(new Date(e.target.valueAsNumber, 0, 1))
+                      </script>
+                    </div>
+                  </div>
+                  <div  class="row">
+                    <div class="mb-3 col-md-6">
+                      <label for="exampleInputEmail1" class="form-label fw-bold">Phone Number <span class="text-danger">*</span></label>
+                      <input type="tel" class="form-control" id="f1"  aria-describedby="emailHelp" name="f2" onkeypress="return isNumber(event);" required maxlength = "10">
+                    </div>
+                    <div class="mb-3 col-md-6">
+                      <label for="exampleInputEmail1" class="form-label fw-bold">Alternate Phone Number</label>
+                      <input type="tel" class="form-control" id="g1"  aria-describedby="emailHelp" onkeypress="return isNumber(event);" name="g2" maxlength = "10" >
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="mb-3 col-md-6">
+                      <label for="exampleInputEmail1" class="form-label fw-bold">Parent/Gaurdian Name </label>
+                      <input type="text" class="form-control" id="h1"  aria-describedby="emailHelp" name="h2">
+                    </div>
+                    <div class="mb-3 col-md-6">
+                      <label for="exampleInputEmail1" class="form-label fw-bold">Parent Phone Number</label>
+                      <input type="tel" onkeypress="return isNumber(event);" class="form-control" id="i1"  aria-describedby="emailHelp" name="i2" maxlength = "10">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="mb-3  col-md-6">
+                      <label for="exampleInputEmail1" class="form-label fw-bold">Address</label>
+                      <textarea  class="form-control" id="k1" rows="1" aria-describedby="emailHelp" name="k2"></textarea>
+                    </div>
+                    <div class="mb-3 col-md-6">
+                      <label for="inputState" class="form-label  fw-bold ">Source</label>
+                      <select id="l1" class="form-select role" name="l2">
+                        <option  value="" disabled selected>select source</option>
+                        {% for val in sources %}
+                        <option value="{{val.source_name}}">{{val.source_name}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+                  <div class="alert alert-success alert-dismissible fade show w-25 " id="alert1" style="display:none;" role="alert" >
+                    <i class="bi bi-check-circle me-1 "></i>
+                  successfully added!
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                  <div class="col-md-12 "  >
+                    <input type="button" id="save1" class="btn btn-primary  mt-3 "  value="Submit">
+                    <div class="spinner-border text-primary" style="display:none;" id="loadd">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                  </div>
+              </form>
+              </div>
+            </div>
+            <!--<div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">-->
+            <!--  <div class="col-md-10">-->
+            <!--    <form id="formid2" >{% csrf_token %}-->
+            <!--      <div class="row">-->
+            <!--        <div class="col-md-3 mt-1">-->
+            <!--          <label for="exampleInputEmail1" class="form-label fw-bold">Upload excel file</label>-->
+            <!--        </div>-->
+            <!--        <div class="col-md-6">-->
+            <!--          <input type="file" accept=".xlsx,.xls,.csv" class="form-control" id="file1"  aria-describedby="emailHelp" name="file1" readonly>-->
+            <!--        </div>-->
+            <!--      </div>-->
+            <!--      <div class="col-md-6">-->
+            <!--        <input type="button" id="save2" class="btn btn-primary  mt-3" value="Submit">-->
+            <!--      </div>-->
+            <!--    </form>-->
+            <!--    <div class="spinner-border text-primary" style="display:none;" id="loadd">-->
+            <!--      <span class="sr-only">Loading...</span>-->
+            <!--    </div>-->
+            <!--  </div>-->
+            <!--</div>-->
+          </div>
+        </div>
+      </div>
+   </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  {% include 'include/footer.html'%}
+  <!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'asset/assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/chart.js/chart.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/echarts/echarts.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/quill/quill.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/simple-datatables/simple-datatables.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/tinymce/tinymce.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'asset/assets/js/main.js' %}"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+  <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js" defer></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</div>
+</body>
+<script>
+  /*only number */
+function isNumber(evt) {
+  evt = (evt) ? evt : window.event;
+  var charCode = (evt.which) ? evt.which : evt.keyCode;
+  if (charCode > 31 && (charCode < 48 || charCode > 57))
+    {
+      return false;
+  }  return true;
+}
+
+//email validate
+var validate_email = function(email){
+  var pattern = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  var is_email_valid = false;
+  if(email.match(pattern) != null){
+    is_email_valid = true;
+  }
+  return is_email_valid;
+}
+
+$(document).on("change", "#j1", function(){
+  var input_val = $(this).val();
+  var is_success = validate_email(input_val);
+  if(!is_success){
+    $("#j1").focus().css('border-color','red');
+  }
+  else{
+    $("#j1").css('border-color','#ced4da');
+  }
+});
+//insert enquiries form
+$('#save1').click(function(e){
+  $a1 = $('#a1').val();
+  $b1 = $('#b1').val();
+  $c1 = $('#c1').val();
+  $d1 = $('#d1').val();
+  $e1 = $('#e1').val();
+  $f1 = $('#f1').val();
+  $j1 = $('#j1').val();
+  if( !$('#a1').val() | !$('#b1').val() | $c1=="" | !$('#d1').val() | $e1== "" |  $f1=="" | $j1=="" )
+  {
+    swal("Please Filled required(*) field","failed",{icon: 'error'});
+  }
+  else if($f1.length != 10)
+  {
+    swal("Please Enter 10 digit number in phone field","failed",{icon: 'error'});
+  }
+  else
+  {
+    e.preventDefault();
+    var formData = new FormData($('#formid1')[0]);
+    $('#save1').hide();
+    $('#loadd').show();
+    $.ajax({
+      url:'{% url "enqu" %}',
+      type:'POST',
+      data:formData,
+      contentType:false,
+      processData:false,
+      dataType:'JSON',
+      success:function(data){
+        data1=data.status
+        if(data1=='success'){
+          $("#formid1")[0].reset();
+          $('#alert1').show(0).delay(2000).hide(0);
+          $('#loadd').hide();
+          $('#save1').show();
+          window.location.href = "/index";
+        }
+        else if(data1=='email')
+        {
+        swal("Your phone numbers or email already exist!", "failed",{icon: 'error'});
+        setTimeout(function(){
+          $('#loadd').fadeOut('slow', function() {
+            $('#save1').show();
+          });
+        }, 3000);
+        }
+        else
+        {
+        swal("Your data failed to inserted!!", "failed",{icon: 'error'});
+        setTimeout(function(){
+          $('#loadd').fadeOut('slow', function() {
+            $('#save1').show();
+          });
+        }, 3000);
+        }
+      }
+    });
+  }
+});
+
+//bulk insert
+$('#save2').click(function(e){
+  e.preventDefault();
+  var formData = new FormData($('#formid2')[0]);
+  $('#save1').hide();
+  $('#loadd').show();
+  $.ajax({
+    url:'/file_upload',
+    type:'POST',
+    data:formData,
+    contentType:false,
+    processData:false,
+    dataType:'JSON',
+    success:function(data){
+      data1=data.Status
+      var remove_Item = 'Success';
+      arr=[];
+      y = $.grep(data1, function(value) {
+      if(value != remove_Item){
+        arr.push(value);
+      }
+      });
+      if(arr!=''){
+        swal("Your "+arr+" details are incorrect",{icon:"error"});
+        $("#formid2")[0].reset();
+        setTimeout(function(){
+          $('#loadd').fadeOut('slow', function() {
+            $('#loadd').hide();
+            $('#save1').show();
+          });
+        },500);
+      }
+      else{
+        swal("Success",{icon:"success"});
+        $("#formid2")[0].reset();
+        $('#loadd').hide();
+        $('#save1').show();
+      }
+    }
+  });
+});
+</script>
+</html>

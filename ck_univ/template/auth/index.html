@@ -1,0 +1,437 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Dashboard</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <link href="{% static 'asset/assets/img/CK-Edge-logo.png' %}" rel="icon">
+  <!-- <link href="{% static 'asset/assets/img/CK_Edge.png' %}" rel="apple-touch-icon"> -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/quill/quill.snow.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/simple-datatables/style.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/css/style.css' %}" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+  <style>
+   *{
+      font-size:small !important;
+    }
+
+    #footbottom{
+      min-height:100vh !important ;
+      display:flex !important ;
+      flex-direction:column !important ;
+      justify-content:space-between !important ;
+    }
+
+
+
+ </style>
+</head>
+
+<body>
+   <div id="footbottom">
+  <!-- ======= Header ======= -->
+  {% include 'include/header.html'%}
+
+  <!-- ======= Sidebar ======= -->
+  {% include 'include/sidebar.html'%}
+  <!-- End Sidebar-->
+
+  <!-- style="margin-left:200px !important" -->
+
+  <main id="main" class="main " >
+
+    <!-- End Page Title update form-->
+
+    <!--  update enq form-->
+    <div class="modal fade" id="Modal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+      <div class="modal-dialog "  >
+        <div class="modal-content  "  >
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Enquiry Update Form</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body"  >
+            <form id="formid2" >{% csrf_token %}
+              <div class="mb-3 ">
+                <input type="text" class="form-control" id="id1"  aria-describedby="emailHelp" name="id" hidden >
+              </div>
+              <div class="row">
+              <div class="mb-3 col-md-6">
+                  <label for="inputState" class="form-label  fw-bold">Course name*</label>
+                  <select id="a1" class="form-select role" name="a2" required>
+                    <option value="" disabled selected >Select your course</option>
+
+
+                  </select>
+                </div>
+
+                <div class="mb-3 col-md-6">
+                  <label for="inputState" class="form-label  fw-bold">Location*</label>
+                  <select id="b1" class="form-select role" name="b2" required>
+                    <option value="" disabled selected >Location...</option>
+                  </select>
+              </div>
+          </div>
+          <div class="row">
+                <div class="mb-3 col-md-6">
+                  <label for="exampleInputEmail1" class="form-label fw-bold">Candidate Name*</label>
+                  <input type="text" class="form-control" id="c1"  aria-describedby="emailHelp" name="c2" required>
+                </div>
+                <div class="mb-3 col-md-6">
+                  <label for="exampleInputPassword1" class="form-label fw-bold">Email*</label>
+                  <input type="email" class="form-control" id="j1"  name="j2" required>
+                </div>
+              </div>
+                <div class="row">
+                <div class="mb-3 col-md-6">
+                  <label for="inputState" class="form-label  fw-bold">Qualification*</label>
+                  <select id="d1" class="form-select role" name="d2" required>
+                    <option value="" disabled selected >Select</option>
+                  </select>
+                </div>
+                <div class="mb-3 col-md-6 ">
+                  <label for="exampleInputEmail1" class="form-label fw-bold">Completed Year*</label>
+                  <input type="number" placeholder="YYYY" class="form-control" min="1999" max="2022" id="e1" name="e2" required>
+                  <script>
+                      document.querySelector("input[type=number]")
+                      .oninput = e => console.log(new Date(e.target.valueAsNumber, 0, 1))
+                  </script>
+                </div>
+              </div>
+                <div  class="row">
+                <div class="mb-3 col-md-6">
+
+                  <label for="exampleInputEmail1" class="form-label fw-bold">Phone Number*</label>
+                  <input type="text" class="form-control" id="f1"  aria-describedby="emailHelp"  maxlength = "10" name="f2" required>
+                </div>
+                <div class="mb-3 col-md-6">
+
+                  <label for="exampleInputEmail1" class="form-label fw-bold">Alternate Phone Number</label>
+                  <input type="text" class="form-control" id="g1"  aria-describedby="emailHelp"  maxlength = "10" name="g2" required>
+                </div>
+              </div>
+              <div class="row">
+                  <div class="mb-3 col-md-6">
+                    <label for="exampleInputEmail1" class="form-label fw-bold">Parent/Gaurdian Name </label>
+                    <input type="text" class="form-control" id="h1"  aria-describedby="emailHelp" name="h2" required>
+                  </div>
+                <div class="mb-3 col-md-6">
+                  <label for="exampleInputEmail1" class="form-label fw-bold">Parent Phone Number</label>
+                  <input type="text" class="form-control" id="i1"  aria-describedby="emailHelp"  maxlength = "10" name="i2" required>
+                </div>
+            </div>
+          <div class="row">
+
+          <div class="mb-3  col-md-6">
+              <label for="exampleInputEmail1" class="form-label fw-bold">Address</label>
+              <textarea  class="form-control" id="k1" rows="1"
+             aria-describedby="emailHelp" name="k2" required></textarea>
+            </div>
+
+            <div class="mb-3 col-md-6">
+              <label for="inputState" class="form-label  fw-bold ">Source</label>
+              <select id="l1" class="form-select role" name="l2 " required>
+                <option value="" disabled selected>select source</option>
+              </select>
+          </div>
+        </div>
+        <div class="col-md-12 text-center">
+         <input type="submit" id="update" class="btn btn-primary  mt-3 w-25  " value="Update">
+        </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <!-- add emp form-->
+
+      <!--end-->
+     <!--card -->
+    <div class="card  col-md-12"  >
+        <div class="card-body" style="box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;">
+          <div class="row">
+            <div class="col-md-6"> <h5 class="fw-bold mt-2" style="color:#012970">Enquiries</h5></div>
+            <div class="col-md-6"><a  href="/e_form"  ><button class="btn btn-success float-end mt-2 mb-2 border"  id="save" type="submit">Add Enquiry</button></a></div>
+          </div>
+
+
+          <div class="table-responsive">
+
+            <form enctype="multipart/form-data">{% csrf_token %}
+
+            <table class="table table-hover table-striped  " data-order='[[ 0, "desc" ]]'  id="myTable">
+              <thead >
+                <tr  class=" fs-6 text">
+                  <th scope="col">#</th>
+                  <th scope="col">pay</th>
+                  <th scope="col">Course</th>
+                  <th scope="col">Location</th>
+                  <th scope="col">Candid_name</th>
+                  <th scope="col">Qualification</th>
+                  <th scope="col">Year</th>
+                  <th scope="col">Parent</th>
+                  <th scope="col">Phone</th>
+                  <th scope="col">Alt_num</th>
+                  <th scope="col">Parent</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Address</th>
+                  <th scope="col">Source</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+
+              </tbody>
+            </table>
+        </form>
+         </div>
+        </div>
+      </div>
+
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  {% include 'include/footer.html'%}
+  <!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'asset/assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/chart.js/chart.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/echarts/echarts.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/quill/quill.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/simple-datatables/simple-datatables.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/tinymce/tinymce.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'asset/assets/js/main.js' %}"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+  <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js" defer></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</div>
+</body>
+<script>
+$(document).ready(function(){
+  var pathname = window.location.pathname;
+  $('.nav-item> a[href="'+pathname+'"]').removeClass('collapsed');
+  table=$('#myTable').DataTable({
+        // scrollX: true,
+        responsive: true,
+        "fnRowCallback" : function(nRow, aData, iDisplayIndex){
+                $("td:first", nRow).html(iDisplayIndex +1);
+               return nRow;
+            },
+             "language": {"paginate": {
+             "previous": '<i class="fa fa-angle-left" style="color:  #012970;"></i>',
+             "next": '<i class="fa fa-angle-right" style="color:  #012970;"></i>'
+             },
+     },
+
+        'ajax':{
+          url:'/enq_fetch',
+          processing: true,
+          type :'POST',
+          dataSrc: "",
+          data:{
+            csrfmiddlewaretoken:'{{ csrf_token }}'
+           },
+          dataType:'JSON',
+          },
+
+          'columns':[
+
+            {data: "id"},
+
+            {data: function(o) {
+              return '<a  href="/enroll_form/'+o["id"]+'" class="btn btn-success btn-sm text-white"  role="button">Collect cash</a>';
+            }} ,
+            { data: "acourse_id__cname"},
+            { data: "Location"},
+            { data: "candid_name"},
+            { data: "education"},
+            { data: "comp_year"},
+            { data: "parent_name"},
+            { data: "ph_num"},
+            { data: "al_ph_num"},
+            { data: "parent_ph_num"},
+            { data: "email"},
+            { data: "address"},
+            { data: "source"},
+
+            {data: function(o) {
+              return '<a class="btn btn-sm" title="edit" onclick="edit_enq('+o.id+')" data-bs-toggle="modal" data-bs-target="#Modal2" >' + '<i class="fas fa-edit"></i>' + '</a><a class="btn   btn-sm"  title="delete" onclick="deleteid('+o.id+')">' + '<i class="fas fa-trash"></i>' + '</a>';
+            }}
+          ]
+
+        })
+});
+
+
+//delete
+
+function deleteid(id){
+  swal({
+  title: "Are you sure?",
+  text: "Once deleted, you will not be able to recover ",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+    })
+    .then((willDelete) => {
+    if (willDelete) {
+        $.ajax({
+        type:'POST',
+        url:'/enq_delete',
+        data:{"id":id,csrfmiddlewaretoken:"{{ csrf_token }}"},
+        dataType:'json',
+        success:function(data){
+        swal("successfully deleted!", {
+        icon: "success", });
+        table.ajax.reload()
+    }})
+}});
+
+}
+
+
+//edit
+
+function edit_enq(id){
+    $.ajax({
+        url:"/edit_enroll",
+        type:"POST",
+        data:{id:id, csrfmiddlewaretoken:'{{ csrf_token }}'},
+        dataType:"JSON",
+        success:function(data){
+              $('#id1').val(data.user['id']);
+              $('#e1').val(data.user['comp_year']);
+              $('#f1').val(data.user['ph_num']);
+              $('#g1').val(data.user['al_ph_num']);
+              $('#j1').val(data.user['email']);
+              $('#k1').val(data.user['address']);
+              $('#c1').val(data.user['candid_name']);
+              $('#h1').val(data.user['parent_name']);
+              $('#i1').val(data.user['parent_ph_num']);
+              $('#a1').html('<option value="'+data.user["course_id"]+'"selected>'+data.user["course_name"]+'</option>');
+              $('#d1').html('<option value="'+data.user["education"]+'"selected>'+data.user["education"]+'</option>');
+              $('#b1').html('<option value="'+data.user["Location"]+'"selected>'+data.user["Location"]+'</option>');
+              $('#l1').html('<option value="'+data.user["source"]+'"selected>'+data.user["source"]+'</option>');
+                categdata = data.list_val
+                var selOpts = "";
+                for (i=0;i<categdata.length;i++)
+                {
+                  var val = categdata[i];
+                  var val_id=data.list_id[i]
+                  selOpts += "<option value='"+val_id+"'>"+val+"</option>";
+                  $('#a1').children('option[value= "'+val_id+'"]').css("display","none");
+                }
+                  $('#a1').append(selOpts);
+
+                //qualification
+                categdata1 = data.list_quali
+                var selOpts1 = "";
+                for (i=0;i<categdata1.length;i++)
+                {
+                  var val = categdata1[i];
+                  selOpts1 += "<option value='"+val+"'>"+val+"</option>";
+                  $('#a1').children('option[value= "'+val+'"]').css("display","none");
+                }
+                  $('#d1').append(selOpts1);
+
+                //location
+                categdata3 = data.list_loc
+                var selOpts2 = "";
+                for (i=0;i<categdata3.length;i++)
+                {
+                  var val = categdata3[i];
+                  selOpts2 += "<option value='"+val+"'>"+val+"</option>";
+                  $('#b1').children('option[value= "'+val+'"]').css("display","none");
+                }
+                  $('#b1').append(selOpts2);
+
+                //source
+                categdata4 = data.list_sources
+                var selOpts3 = "";
+                for (i=0;i<categdata4.length;i++)
+                {
+                  var val = categdata4[i];
+                  selOpts3 += "<option value='"+val+"'>"+val+"</option>";
+                  $('#l1').children('option[value= "'+val+'"]').css("display","none");
+                }
+                  $('#l1').append(selOpts3);
+
+        }
+        });
+    }
+
+//update
+    $('#update').click(function(e){
+      $a1 = $('#a1').val();
+      $b1 = $('#b1').val();
+      $c1 = $('#c1').val();
+      $d1 = $('#d1').val();
+      $e1 = $('#e1').val();
+      $f1 = $('#f1').val();
+      $j1 = $('#j1').val();
+        if( !$('#a1').val() | !$('#b1').val() | $c1=="" | !$('#d1').val() | $e1== "" |  $f1=="" | $j1=="" )
+        {
+           swal("Please complete all * field","failed",{icon: 'error'});
+          // $('.c').show();
+        }
+      else
+        {
+
+      e.preventDefault();
+
+      var formData=new FormData($('#formid2')[0]);
+      $.ajax({
+        url:"/update_enqform",
+        method:"POST",
+        data:formData,
+        contentType:false,
+        processData:false,
+        success:function(data){
+            data1=data.status
+            if(data1=='Success'){
+              swal("Your Details Updated Successfully!!",{icon: "success"});
+              $('#Modal2').modal('hide');
+              $(".modal-backdrop").remove();
+              table.ajax.reload();
+              }
+              else
+              {
+              swal("Failed to Update!!", "failed",{icon: 'error'});
+              }
+
+        },
+        error:function(error){
+          alert(' update fail ')
+        }
+      });}
+
+});
+
+
+</script>
+</html>

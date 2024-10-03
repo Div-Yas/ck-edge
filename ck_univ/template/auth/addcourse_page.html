@@ -1,0 +1,340 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Enrollment</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <link href="{% static 'asset/assets/img/CK-Edge-logo.png' %}" rel="icon">
+  <link href="{% static 'asset/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/quill/quill.snow.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <!-- <link href="{% static 'asset/assets/vendor/simple-datatables/style.css' %}" rel="stylesheet"> -->
+  <link href="{% static 'asset/assets/css/style.css' %}" rel="stylesheet">
+
+
+
+</head>
+  <style>
+
+   tfoot {
+     display: table-header-group;
+}
+    #footbottom{
+      min-height:100vh !important ;
+      display:flex !important ;
+      flex-direction:column !important ;
+      justify-content:space-between !important ;
+    }
+    .co{
+      color:#012970
+    }
+    *{
+      font-size:small !important;
+    }
+ </style>
+</head>
+
+<body>
+   <div id="footbottom">
+  <!-- ======= Header ======= -->
+  {% include 'include/header.html'%}
+
+  <!-- ======= Sidebar ======= -->
+  {% include 'include/sidebar.html'%}
+  <!-- End Sidebar-->
+
+  <main id="main" class="main" >
+<!-- End Page Title -->
+<div  >
+      <!--add emp form-->
+      <div class="modal fade" id="Modal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+        <div class="modal-dialog "  >
+          <div class="modal-content  "  >
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Enrollment</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body"  >
+              <form id="formid2" >{% csrf_token %}
+                <div class="mb-3 ">
+                  <input type="text" class="form-control" id="id1"  aria-describedby="emailHelp" name="id" hidden >
+                </div>
+                <div class="row">
+                <div class="mb-3 col-md-6">
+
+                        <label for="inputState" class="form-label  fw-bold">Course name*</label>
+                        <input type="text" class="form-control" id="a1"  aria-describedby="emailHelp" name="a2"  >
+
+                  </div>
+                  <div class="mb-3 col-md-6">
+
+                        <label for="inputState" class="form-label  fw-bold">Course details*</label>
+                        <input type="text" class="form-control" id="b1"  aria-describedby="emailHelp" name="b2"  >
+
+                  </div>
+                  </div>
+                  <div class="row">
+                  <div class="mb-3 col-md-6">
+
+                        <label for="inputState" class="form-label  fw-bold">Course price*</label>
+                        <input type="text" class="form-control" id="c1"  aria-describedby="emailHelp" name="c2"  >
+
+                  </div>
+
+                  <div class="mb-3 col-md-6">
+                    <label for="inputState" class="form-label  fw-bold">Number Of Month</label>
+                    <select id="d1" class="form-select role" name="d2"  >
+                        <option value="1" >1</option>
+                        <option value="2" >2</option>
+                        <option value="3" >3</option>
+                        <option value="4" >4</option>
+                        <option value="5" >5</option>
+                        <option value="6" >6</option>
+                      </select>
+                </div>
+            </div>
+            <div class="row">
+              <div class="mb-3 col-md-6">
+                <label for="inputState" class="form-label  fw-bold">GST%*</label>
+                <input type="text" class="form-control" id="g1"  aria-describedby="emailHelp" name="g2">
+              </div>
+            </div>
+            <div class="col-md-12 text-center">
+              <input type="submit" id="update" class="btn btn-primary  mt-3 w-25 " value="Update">
+            </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+
+
+
+      <!--end-->
+     <!--card -->
+     <div >
+    <div class="card col-md-12" >
+        <div class="card-body" style="box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;">
+          <div class="row">
+            <div class="col-md-8"> <h5 class="fw-bold mt-2" style="color:#012970">Course</h5></div>
+            {% if request.session.role == "Admin" %}
+            <div class="col-md-4"> <a  href="/add_course"  ><button class="btn btn-success mt-2 border float-end mb-2 " id="save"  type="submit">Add Course</button></a>    </div>
+            <!-- <div class="col-md-2"></div> -->
+            {% endif %}
+          </div>
+          <div class="table-responsive my-2">
+
+            <form enctype="multipart/form-data">{% csrf_token %}
+
+            <table class="table table-hover table-striped " data-order='[[ 0, "desc" ]]'  id="myTable">
+              <thead>
+                <tr  >
+                  <th scope="col">#</th>
+                  <th scope="col">course_name</th>
+                  <th scope="col">price</th>
+                  <th scope="col">details</th>
+                  <th scope="col">duration</th>
+                  <th scope="col">GST%</th>
+                  <th scope="col">Actions</th>
+
+                </tr>
+              </thead>
+              <tbody>
+
+              </tbody>
+            </table>
+        </form>
+         </div>
+        </div>
+      </div>
+    </div>
+
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  {% include 'include/footer.html'%}
+  <!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'asset/assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/chart.js/chart.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/echarts/echarts.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/quill/quill.min.js' %}"></script>
+  <!-- <script src="{% static 'asset/assets/vendor/simple-datatables/simple-datatables.js' %}"></script> -->
+  <script src="{% static 'asset/assets/vendor/tinymce/tinymce.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'asset/assets/js/main.js' %}"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css"> -->
+  <!-- <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js" defer></script> -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css"  href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" type="text/css"  href="https://cdn.datatables.net/buttons/1.4.0/css/buttons.dataTables.min.css" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/pdfmake.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.4.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.4.0/js/buttons.flash.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.4.0/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.4.0/js/buttons.print.min.js"></script>
+
+</div>
+</body>
+<script>
+$(document).ready(function(){
+  var pathname = window.location.pathname;
+  $('.nav-item> a[href="'+pathname+'"]').removeClass('collapsed');
+  var userRole = "{{ request.session.role }}";
+  table=$('#myTable').DataTable({
+
+            "language": {
+              "processing": "DataTables is currently busy"
+            },
+            // scrollX: true,
+            responsive: true,
+            "fnRowCallback" : function(nRow, aData, iDisplayIndex){
+                $("td:first", nRow).html(iDisplayIndex +1);
+               return nRow;
+            },
+            "language": {"paginate": {
+             "previous": '<i class="fa fa-angle-left" style="color:  #012970;"></i>',
+             "next": '<i class="fa fa-angle-right" style="color:  #012970;"></i>'
+             },
+     },
+
+        'ajax':{
+          url:'/addcour_fetch',
+          processing: true,
+          type :'POST',
+          dataSrc:"",
+          data:{
+            csrfmiddlewaretoken:'{{ csrf_token }}'
+           },
+          dataType:'JSON',
+          },
+          'columns':[
+            { data: "id"},
+            { data: "cname"},
+            { data: "cprice"},
+            { data: "cdetails"},
+            { data: "cduration"},
+            { data: "cgst"},
+
+            {data: function(o) {
+              if(userRole == "Admin"){
+              return '<a class="btn btn-sm" title="edit" onclick="edit_addcourse('+o.id+')" data-bs-toggle="modal" data-bs-target="#Modal2" >' + '<i class="fas fa-edit"></i>' + '</a><a class="btn   btn-sm"  title="delete" onclick="deleteid('+o.id+')">' + '<i class="fas fa-trash"></i>' + '</a>';
+              }else{
+                return '-';
+              }
+            }}
+          ]
+
+        })
+});
+
+function edit_addcourse(id){
+    $.ajax({
+        url:"/edit_addcourse",
+        type:"POST",
+        data:{id:id, csrfmiddlewaretoken:'{{ csrf_token }}'},
+        dataType:"JSON",
+        success:function(data){
+          $('#id1').val(data.user['id']);
+          $('#a1').val(data.user['course_name']);
+          $('#b1').val(data.user['cdetails']);
+          $('#c1').val(data.user['cprice']);
+          $('#d1').val(data.user['cduration']);
+          $('#g1').val(data.user['cgst']);
+        }
+        });
+    }
+
+
+$('#update').click(function(e){
+    $a1 = $('#a1').val();
+    $b1 = $('#b1').val();
+    $c1 = $('#c1').val();
+    $d1 = $('#d1').val();
+      if(  $a1=="" |  $b1=="" | $c1=="" | !$('#d1').val()   )
+        {
+           swal("Please complete all * field","failed",{icon: 'error'});
+        }
+      else
+        {
+      e.preventDefault();
+      var formData=new FormData($('#formid2')[0]);
+      $.ajax({
+        url:"/update_addcourse",
+        method:"POST",
+        data:formData,
+        contentType:false,
+        processData:false,
+        success:function(data){
+        data1=data.status
+         if(data1=='Success'){
+              swal("Your Record inserted Successfully!!", "success");
+              $('#Modal2').modal('hide');
+              $(".modal-backdrop").remove();
+              table.ajax.reload();
+              }
+         else
+              {
+              swal("Your Record failed to inserted!!", "failed",{icon: 'error'});
+              }
+        },
+        error:function(error){
+          alert(' update fail ')
+        }
+      });}
+
+});
+
+function deleteid(id){
+  swal({
+  title: "Are you sure?",
+  text: "Once deleted, you will not be able to recover ",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+    })
+    .then((willDelete) => {
+    if (willDelete) {
+        $.ajax({
+        type:'POST',
+        url:'/delete_course',
+        data:{"id":id,csrfmiddlewaretoken:"{{ csrf_token }}"},
+        dataType:'json',
+        success:function(data){
+        swal("successfully deleted!", {
+        icon: "success", });
+        table.ajax.reload()
+    }})
+}});
+
+}
+
+
+</script>
+</html>

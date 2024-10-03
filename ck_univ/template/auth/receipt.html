@@ -1,0 +1,125 @@
+{% load static %}
+{% load utils %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<style>
+  /* td{
+    margin: 10px;
+  } */
+</style>
+</head>
+
+<body>
+<h4 style="text-align:center;font-family: Consolas,monospace;font-size:14px;">HEMA'S ENTERPRISES PRIVATE LIMITED</h4>
+<table width="100%" border="1" cellspacing="2" cellpadding="2">
+  <tr>
+    <td align="center" width="50%"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td align="left" style="padding-left: 10px;">
+          <img src="/home/CKEdge/CK_university_enrollment/ck_univ/static/asset/assets/img/HEPL_logo_WB2.png" width="120" height="60"/>
+        </td>
+        <td align="right" style="padding-right: 10px;">
+           <img src="/home/CKEdge/CK_university_enrollment/ck_univ/static/asset/assets/img/CK-Edge-logo.png" width="130" height="130"/>
+        </td>
+      </tr>
+    </table>
+    </td>
+  <td width="70%" style="padding:4px;font-family: Consolas,monospace;font-size:12px;">
+      <b>No.8, SIDCO INDUSTRIAL ESTATE,</br> Semmandalam,TamilNadu 607001<b>
+      <pre>GST No     : 33AAFCH1107H1Z5</br>CIN No     : U74999TN2019PTC132662</br>PAN No     : AAFCH1107H</br>Receipt_No : {{receipt_id}}</b></pre>
+    </td>
+  </tr>
+  <tr>
+    <td style="width:30%;padding:3px"><b>Bill To :  {{candid_name}}</b></td>
+    <td style="width:70%;padding:3px"><pre><b>INV No : {{receipt_id}}           INV Date : {{date}}</b></pre></td>
+  </tr>
+  <tr>
+    <td width="50%"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td style="font-family:Consolas,monospace; font-weight:600; font-size:13px;padding-left:2px"><b>Address :</b></td>
+          </tr>
+          <tr>
+            <td style="font-family:Consolas,monospace; font-weight:300; font-size:12px;padding-left:5px"><b>{{address}}</b></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+          </tr>
+          </table></td>
+      </tr>
+    </table></td>
+    <td width="50%" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td style="font-family:Consolas,monospace; font-weight:300; font-size:12px;padding:3px;padding-bottom: 0px;">
+          <pre style="color:black;"><b>Name           :  {{candid_name}}<br>Enrollment No  :  {{candid_no}}<br>Contact Number :  {{ph_num}}</b>
+          </pre>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td colspan="2"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td style="font-family:Consolas,monospace; font-weight:400; font-size:13px; border-top:1px solid #333; border-bottom:1px solid #333; border-left:1px solid #333; border-right:1px solid #333;padding-top:6px ;" width="10%" height="32" align="center"><b>SI.No</b></td>
+        <td style="font-family:Consolas,monospace; font-weight:400; font-size:12px; border-top:1px solid #333; border-bottom:1px solid #333; border-right:1px solid #333;padding-top:6px ;" width="50%" align="center"><b>Description of Service</b> </td>
+        <td style="font-family:Consolas,monospace; font-weight:400; font-size:13px; border-top:1px solid #333; border-bottom:1px solid #333; border-right:1px solid #333;padding-top:6px ;" width="33%" align="center"><b>SAC / HSN</b></td>
+        <td style="font-family:Consolas,monospace; font-weight:400; font-size:13px; border-top:1px solid #333; border-bottom:1px solid #333; border-right:1px solid #333;padding-top:6px ;" width="33%" align="center"><b>Rate (INR)</b></td>
+        <td style="font-family:Consolas,monospace; font-weight:400; font-size:13px; border-top:1px solid #333; border-bottom:1px solid #333; border-right:1px solid #333;padding-top:6px ;" width="33%" align="center"><b>Amount (INR)</b></td>
+      </tr>
+      <tr>
+        <td style="font-family:Consolas,monospace; font-weight:300; font-size:13px; border-bottom:1px solid #333; border-left:1px solid #333; border-right:1px solid #333;padding-top:6px ;" height="32" align="center"><b>1</b></td>
+        <td style="font-family:Consolas,monospace; font-weight:300; font-size:13px; border-bottom:1px solid #333; border-right:1px solid #333;padding-top:6px ;" align="center"><b>{{course_name}} - {{course_dur}} Months</b></td>
+        <td style="font-family:Consolas,monospace; font-weight:300; font-size:13px; border-bottom:1px solid #333; border-right:1px solid #333;padding-top:6px ;" align="center"><b>999293</b></td>
+        <td style="font-family:Consolas,monospace; font-weight:300; font-size:13px; border-bottom:1px solid #333; border-right:1px solid #333;padding-top:6px ;" align="center"><b>{{course_price}}</b></td>
+        <td style="font-family:Consolas,monospace; font-weight:300; font-size:13px; border-bottom:1px solid #333; border-right:1px solid #333;padding-top:6px ;" align="center"><b>{{course_price}}</b></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td width="50%"><table width="100%" height="80%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td style="font-family:Consolas,monospace; font-weight:400; font-size:13px;padding-left:2px"> <b>Amount In Words :</br> {{paid_amt}}</b></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+          </tr>
+          </table></td>
+      </tr>
+    </table></td>
+    <td width="50%" align="top"><table width="100%" height="80%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td style="font-family:Consolas,monospace; font-weight:300; font-size:12px;padding:2px;">
+          <pre style="color:black;"><b>Payment Details :</b></br></br><b>Course Price                 :   Rs.{{course_price}}<br>{% if discount is None %}{% else %}Discount             {{discount}}%     :   Rs.{{price_dis}}<br>Grand Total                  :   Rs.{{dis_price}}<br>{% endif %}CGST 9%                      :   Rs.{{gst_amt}}<br>SGST 9%                      :   Rs.{{gst_amt}}<br>Net Total           INR      :   Rs.{{grant_tot}}<br><br>Paid Amount                  :   Rs.{{final_price}}<br>Pending Amount               :   Rs.{{bal_amt}}
+            </b>
+          </pre>
+        </td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td style="font-family:Consolas,monospace; font-weight:300; font-size:13px; border-bottom:1px solid #333; border-right:1px solid #333;padding:3px;" width="50%" align="left">
+      <pre style="color:black;"><b>Company Account Details :</b></br></br><b><span>Account No    : </span> 000105034637<br><span> Account Type  : </span> CurrentAccount<br><span> Bank Name     : </span> ICICI bank<br><span> IFSC Code     : </span> ICIC0000001<br><span> Branch        : </span> Cenotaph Road Branch</b>
+          </pre>
+    </td>
+    <td align="center" width="50%">
+      <img src="/home/CKEdge/CK_university_enrollment/ck_univ/static/asset/assets/img/QR_code.png" alt="Qr_code" width="100" height="100">
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" style="font-family:Consolas,monospace; font-weight:200; font-size:12px;padding-left:4px ;padding-top:4px;" width="80%">
+      <pre><b>Disclaimer :</br>1.CK EDGE - Word, Logo, TradeMark and Copyright is the sole ownership of its Proprietor
+        - HEMA'S ENTERPRISES PRIVATE LIMITED.</br>2.CK EDGE  is a platform used by HEMA's ENTERPRISES PRIVATE LIMITED for the purpose of
+        training its employees and other interested third parties through online training modules.</br>3.CK EDGE provides the said service for a consideration upon the mutual acceptance of the
+        intended party.</br>4.Fees once paid for the said service by the intended party shall not be refundable at any cost.</b>
+      </pre>
+    </td>
+  </tr>
+</table>
+<p style="padding-top:20px;text-align:center;font-size:11px;font-family:Consolas,monospace;"><b>This is computer generated invoice no signature required</b></p><br>
+</body>
+</html>

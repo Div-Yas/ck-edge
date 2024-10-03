@@ -1,0 +1,1040 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Enrollment</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <link href="{% static 'asset/assets/img/CK-Edge-logo.png' %}" rel="icon">
+  <link href="{% static 'asset/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/quill/quill.snow.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <!-- <link href="{% static 'asset/assets/vendor/simple-datatables/style.css' %}" rel="stylesheet"> -->
+  <link href="{% static 'asset/assets/css/style.css' %}" rel="stylesheet">
+
+
+
+</head>
+<style>
+  * {
+    font-size: small !important;
+  }
+
+  tfoot {
+    display: table-header-group;
+  }
+
+  #footbottom {
+    min-height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+  }
+
+  .co {
+    color: #012970
+  }
+
+  a.disabled {
+    pointer-events: none;
+    cursor: default;
+  }
+
+  div.d {
+    display: none;
+  }
+
+  td.details-control {
+    content: '\f152';
+    font-family: 'Font Awesome\ 5 Free';
+    cursor: pointer;
+    font-size: 22px;
+    color: #55a4be;
+    /* background: url('https://cekfakta.com/vendor/datatables/datatables/examples/resources/details_open.png') no-repeat center center; */
+    cursor: pointer;
+  }
+
+  tr.shown td.details-control {
+    background: url('https://cekfakta.com/vendor/datatables/datatables/examples/resources/details_close.png') no-repeat center center;
+  }
+</style>
+</head>
+
+<body>
+  <div id="footbottom">
+    <!-- ======= Header ======= -->
+    {% include 'include/header.html'%}
+
+    <!-- ======= Sidebar ======= -->
+    {% include 'include/sidebar.html'%}
+    <!-- End Sidebar-->
+
+    <main id="main" class="main">
+      <!-- End Page Title -->
+      <div>
+        <!--add emp form-->
+        <div class="modal fade" id="Modal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog ">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Enrollment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form id="formid2">{% csrf_token %}
+                  <div class="mb-3 ">
+                    <input type="text" class="form-control" id="id1" aria-describedby="emailHelp" name="id" hidden>
+                  </div>
+                  <div class="row">
+                    <div class="mb-3 col-md-6">
+                      <label for="inputState" class="form-label  fw-bold">Course name*</label>
+                      <select id="a1" class="form-select role" name="a2" required>
+                        <option value="" disabled selected>Select your course</option>
+                      </select>
+                    </div>
+
+                    <div class="mb-3 col-md-6">
+                      <label for="inputState" class="form-label  fw-bold">Location</label>
+                      <select id="b1" class="form-select role" name="b2">
+                        <option value="" disabled selected>Location...</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="mb-3 col-md-6">
+                      <label for="exampleInputEmail1" class="form-label fw-bold">Candidate Name*</label>
+                      <input type="text" class="form-control" id="c1" aria-describedby="emailHelp" name="c2" required>
+                    </div>
+                    <div class="mb-3 col-md-6">
+                      <label for="exampleInputPassword1" class="form-label fw-bold">Email*</label>
+                      <input type="email" class="form-control" id="j1" name="j2" required>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="mb-3 col-md-6">
+                      <label for="inputState" class="form-label  fw-bold">Qualification*</label>
+                      <select id="d1" class="form-select role" name="d2" required>
+                        <option value="" disabled selected>Select</option>
+                      </select>
+                    </div>
+                    <div class="mb-3 col-md-6 ">
+                      <label for="exampleInputEmail1" class="form-label fw-bold">Completed Year*</label>
+                      <input type="number" placeholder="YYYY" class="form-control" min="1999" max="2020" id="e1"
+                        name="e2" required>
+                      <script>
+                        document.querySelector("input[type=number]")
+                          .oninput = e => console.log(new Date(e.target.valueAsNumber, 0, 1))
+                      </script>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="mb-3 col-md-6">
+
+                      <label for="exampleInputEmail1" class="form-label fw-bold">Phone Number*</label>
+                      <input type="tel" class="form-control" id="f1" aria-describedby="emailHelp" maxlength="10"
+                        name="f2" required>
+                    </div>
+                    <div class="mb-3 col-md-6">
+
+                      <label for="exampleInputEmail1" class="form-label fw-bold">Alternate Phone Number</label>
+                      <input type="tel" class="form-control" id="g1" aria-describedby="emailHelp" maxlength="10"
+                        name="g2">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="mb-3 col-md-6">
+                      <label for="exampleInputEmail1" class="form-label fw-bold">Parent/Gaurdian Name </label>
+                      <input type="text" class="form-control" id="h1" aria-describedby="emailHelp" name="h2">
+                    </div>
+                    <div class="mb-3 col-md-6">
+                      <label for="exampleInputEmail1" class="form-label fw-bold">Parent Phone Number</label>
+                      <input type="tel" class="form-control" id="i1" aria-describedby="emailHelp" maxlength="10"
+                        name="i2">
+                    </div>
+                  </div>
+                  <div class="row">
+
+                    <div class="mb-3  col-md-6">
+                      <label for="exampleInputEmail1" class="form-label fw-bold">Address</label>
+                      <textarea class="form-control" id="k1" rows="1" aria-describedby="emailHelp" name="k2"></textarea>
+                    </div>
+                    <div class="mb-3 col-md-6">
+                      <label for="exampleInputEmail1" class="form-label fw-bold"> Candidate Enrollment No*</label>
+                      <input type="text" class="form-control" id="candid_no" aria-describedby="emailHelp"
+                        name="candid_no" maxlength="15">
+                    </div>
+                    <div class="mb-3 col-md-6">
+                      <label for="inputState" class="form-label  fw-bold ">Source</label>
+                      <select id="l1" class="form-select role" name="l2">
+                        <option value="" disabled selected>select source</option>
+                      </select>
+                    </div>
+                    <div class="mb-3 col-md-6">
+                      <label for="inputState" class="form-label  fw-bold ">Payment type*</label>
+                      <select id="m1" class="form-select role" name="m2" onchange="d(this)" required>
+                        <option value="" disabled selected>select payment</option>
+                        <option value="Monthly Payment">Monthly Payment</option>
+                        <option value="Full Payment">Full Payment</option>
+                      </select>
+                    </div>
+                    <div class="mb-3 col-md-6">
+                      <label for="inputState" class="form-label  fw-bold ">Payment mode*</label>
+                      <select id="n1" class="form-select role" name="n2" required>
+                        <option value="" disabled selected>select mode</option>
+                        <option value="Cash">Cash</option>
+                        <option value="UPI">UPI ID</option>
+                        <option value="Account Transfer">Account Transfer</option>
+                      </select>
+                    </div>
+                    <div class="mb-3  col-md-6">
+                      <label for="exampleInputEmail1" class="form-label fw-bold">Amount*</label>
+                      <input type="number" class="form-control" id="o1" aria-describedby="emailHelp" name="o2" required>
+                    </div>
+                    <div class="mb-3  col-md-6">
+                      <label for="exampleInputEmail1" class="form-label fw-bold">Remark</label>
+                      <textarea class="form-control" id="p1" rows="1" aria-describedby="emailHelp" name="p2"></textarea>
+                    </div>
+                  </div>
+
+
+                  <div class="col-md-12 text-center">
+                    <input type="submit" id="update" class="btn btn-primary  mt-3 w-25 " value="Update">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="Modal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+          <div class="modal-content  ">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">History</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class=" card-body ">
+              <div class=" ms-1 row">
+                <div class="col-md-6 label fw-bold co ">Candidate Name</div>
+                <div class="col-md-6" id="cname"></div>
+              </div>
+              <div class=" ms-1 row">
+                <div class="col-md-6  label fw-bold co">Balance Amount</div>
+                <div class="col-md-6 " id="balance"></div>
+              </div>
+              <div class="d">
+                <div class=" ms-1 row">
+                  <div class="col-md-6  label fw-bold co">Discount</div>
+                  <div class="col-md-6 " id="discount"></div>
+                </div>
+                <div class=" ms-1 row">
+                  <div class="col-md-6  label fw-bold co">Dis_Amount</div>
+                  <div class="col-md-6 " id="price_dis"></div>
+                </div>
+              </div>
+              <div class="card col-md-11 mt-4">
+                <div class="card-body">
+                  <h5 class="card-title">Payment Details</h5>
+                  <div class="table-responsive">
+                    <table class="table table-striped table-bordered display zero-configuration text-center h6" id="tb">
+                      <thead>
+                        <tr>
+                          <th scope="col">SI.No</th>
+                          <th scope="col">Paid Amount</th>
+                          <th scope="col">Date</th>
+                        </tr>
+                      </thead>
+                      <tbody id="pay_tb">
+
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!---date--->
+      <div class="modal fade" id="Modal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Inactive</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class=" card-body ">
+              <div class=" ms-1 row">
+                <div class="col-md-6 label  co ">Candidate Name</div>
+                <div class="col-md-6 label  co ">Inactive Date</div>
+                <div class="col-md-6" id="can_name"></div>
+                <div class="col-md-6" id="inact_date"></div>
+                <div class="col-md-6" id="st_id" hidden></div>
+              </div>
+              <div class="card col-md-11 mt-4">
+                <div class="card-body">
+                  <div class="col-md-12 mt-3 label fw-bold co ">Change Status To Active? <a
+                      class="btn btn-success btn-sm" title="delete" onclick="update_status_act()"> Active </a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--end-->
+      <!--card -->
+      <div>
+        <div class="card col-md-12">
+          <div class="card-body" style="box-shadow:rgba(0, 0, 0, 0.15) 0px 15px 25px,rgba(0, 0, 0, 0.05) 0px 5px 10px">
+            <div class="row mt-2">
+              <div class="col-md-8">
+                <h5 class="fw-bold mt-2" style="color:#012970">Enrollment</h5>
+              </div>
+              <!--<div class="col-md-2">-->
+              <!--  <select id="courses" class="form-select role" name="courses" onchange="quali()" required>-->
+              <!--    <option value="" disabled selected>Select Course</option>-->
+              <!--  </select>-->
+              <!--</div>-->
+              <!--<div class="col-md-2">-->
+              <!--  <select id="qualifis" class="form-select role" name="qualifis" required onchange="loca()">-->
+              <!--    <option value="" disabled selected>Select Qualification</option>-->
+              <!--  </select>-->
+              <!--</div>-->
+              <!--<div class="col-md-2">-->
+              <!--  <select id="loc" class="form-select role" name="loc" required onchange="fetch_table()">-->
+              <!--    <option value="" disabled selected >Select Location</option>-->
+              <!--  </select>-->
+              <!--</div>-->
+              {% if request.session.role == "Admin" %}
+              <div class="col-md-4 float-end"><a href="/enrollment_form"><button
+                    class="btn btn-success float-end border  " id="save" type="submit">Add Enrollment</button></a>
+                <button class="btn btn-sm float-end mb-1 border-0  " id="filter"></button>
+              </div>
+              <!-- <div class="col-md-2"></div> -->
+              {% endif %}
+            </div>
+            <div class="row my-2">
+              <div id="btn-place"></div>
+            </div>
+            <div class="table-responsive">
+
+              <form enctype="multipart/form-data">{% csrf_token %}
+
+                <table class="table table-hover table-striped " data-order='[[ 0, "desc" ]]' id="myTable">
+                  <thead>
+                    <tr>
+                      <th scope="col">Info</th>
+                      <th scope="col ">#</th>
+                      <th scope="col">Pay</th>
+                      <th scope="col">History</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Candid_name</th>
+                      <th scope="col">Candidate_Rollno</th>
+                      <th scope="col">Course</th>
+                      <th scope="col">Date</th>
+                      <th scope="col">Location</th>
+                      <th scope="col">Qualification</th>
+                      <!--<th scope="col">Year</th>-->
+                      <!--<th scope="col">Parent</th>-->
+                      <th scope="col">Phone</th>
+                      <!--<th scope="col">Alt_num</th>-->
+                      <!--<th scope="col">Parent_num</th>-->
+                      <th scope="col">Email</th>
+                      <!--<th scope="col">Address</th>-->
+                      <!--<th scope="col">Source</th>-->
+                      <th scope="col">pay_type</th>
+                      <th scope="col">pay_mode</th>
+                      <!--<th scope="col">remark</th>-->
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                  </tbody>
+                </table>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </main><!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    {% include 'include/footer.html'%}
+    <!-- End Footer -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="{% static 'asset/assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+    <script src="{% static 'asset/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'asset/assets/vendor/chart.js/chart.min.js' %}"></script>
+    <script src="{% static 'asset/assets/vendor/echarts/echarts.min.js' %}"></script>
+    <script src="{% static 'asset/assets/vendor/quill/quill.min.js' %}"></script>
+    <!-- <script src="{% static 'asset/assets/vendor/simple-datatables/simple-datatables.js' %}"></script> -->
+    <script src="{% static 'asset/assets/vendor/tinymce/tinymce.min.js' %}"></script>
+    <script src="{% static 'asset/assets/vendor/php-email-form/validate.js' %}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{% static 'asset/assets/js/main.js' %}"></script>
+    <script type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css"> -->
+    <!-- <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js" defer></script> -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css"
+      href="https://cdn.datatables.net/buttons/1.4.0/css/buttons.dataTables.min.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/pdfmake.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.4.0/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.4.0/js/buttons.flash.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.4.0/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.4.0/js/buttons.print.min.js"></script>
+
+  </div>
+</body>
+<script>
+  $(document).ready(function () {
+    course();
+    var pathname = window.location.pathname;
+    $('.nav-item> a[href="' + pathname + '"]').removeClass('collapsed');
+    table1();
+  });
+
+  function fetch_table() {
+    var cour = $('#courses').val();
+    var quali = $('#qualifis').val();
+    var loc = $('#loc').val();
+    if ($('#courses').val() && $('#qualifis').val() && $('#loc').val()) {
+      table2();
+    }
+    else {
+      table1();
+    }
+  }
+
+  function format(data) {
+    if (data.source == null) {
+      d1 = '';
+    }
+    else {
+      d1 = data.source;
+    }
+    return '<table cellpadding="5" cellspacing="0"'
+      + ' style="padding-left:50px;">' +
+      '<tr>' +
+      '<td>compeleted_year:</td>' +
+      '<td>' + data.comp_year + '</td>' +
+      '</tr>' +
+      '<tr>' +
+      '<td>parent_name:</td>' +
+      '<td>' + data.parent_name + '</td>' +
+      '</tr>' +
+      '<tr>' +
+      '<td>Alternate No:</td>' +
+      '<td>' + data.al_ph_num + '</td>' +
+      '</tr>' +
+      '<tr>' +
+      '<td>Parent No:</td>' +
+      '<td>' + data.parent_ph_num + '</td>' +
+      '</tr>' +
+      '<tr>' +
+      '<td>address:</td>' +
+      '<td>' + data.address + '</td>' +
+      '</tr>' +
+      '<tr>' +
+      '<td>source:</td>' +
+      '<td>' + d1 + '</td>' +
+      '</tr>' +
+      '<tr>' +
+      '<td>Remark:</td>' +
+      '<td>' + data.remark + '</td>' +
+      '</tr>' +
+      '</table>';
+  }
+
+
+  function table1() {
+    var userRole = "{{ request.session.role }}";
+    $('#myTable').dataTable().fnDestroy();
+    table = $('#myTable').DataTable({
+      dom: 'Bfrtip',
+      "buttons": [
+        'copy', 'csv', 'excel', 'pdf', 'print'
+      ],
+      "language": {
+        "processing": "DataTables is currently busy"
+      },
+      scrollX: true,
+      responsive: true,
+      "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+        $("td:eq(1)", nRow).html(iDisplayIndex + 1);
+        return nRow;
+      },
+      "language": {
+        "paginate": {
+          "previous": '<i class="fa fa-angle-left" style="color:  #012970;"></i>',
+          "next": '<i class="fa fa-angle-right" style="color:  #012970;"></i>'
+        },
+      },
+      initComplete: function () {
+        this.api().columns([7]).every(function () {
+          var column = this;
+          var select = $('<select id="sel" class="form-select role "><option value="">Filter course  </option><select>').appendTo("#filter").on('click', function (evt) {
+            evt.stopPropagation();
+          }).on('change', function () {
+            var val = $.fn.dataTable.util.escapeRegex($(this).val());
+            column.search(val ? '^' + val + '$' : '', true, false).draw();
+          });
+          column.data().unique().sort().each(function (d, j) {
+            select.append('<option value="' + d + '">' + d + '</option>');
+          });
+        });
+        $('#btn-place').html(table.buttons().container());
+      },
+      'ajax': {
+        url: '/enroll_fetch',
+        processing: true,
+        type: 'POST',
+        dataSrc: "",
+        data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
+        dataType: 'JSON',
+      },
+      'columns': [
+        {
+          "className": 'details-control',
+          "orderable": false,
+          "data": null,
+          "defaultContent": '<span class="toggle-details">+</span>'
+        },
+        { data: "id" },
+        {
+          data: function (o) {
+            if (userRole == "Admin") {
+              const d = new Date()
+              d.getMonth() - 2
+              var datestring = d.getFullYear() + "-0" + (d.getMonth() + 1) + "-" + d.getDate()
+              var dates = '2023-02-28';
+              if (o.blc_amnt != 0) {
+                return '<a  class="btn btn-success btn-sm text-white" title="pay" role="button" href="/pendding_page/' + o["id"] + '" >Collect cash</a>';
+              }
+              else {
+                return '<a  class="btn btn-success btn-sm text-white disabled" role="button" title="pay"  href="/enroll_form/' + o["id"] + '" >Collect cash</a>';
+              }
+            } else {
+              return '-';
+            }
+          }
+        },
+        {
+          data: function (o) {
+            return '<a class="btn btn-primary btn-sm text-white" role="button" title="History"  onclick="History_enroll(' + o.id + ')" data-bs-toggle="modal" data-bs-target="#Modal3" >History</a>'
+          }
+        },
+        {
+          data: function (o) {
+            if (userRole == "Admin") {
+              if (o.status == 'Active') {
+                return '<a class="btn btn-success btn-sm" role="button"  title="Active" onclick="update_status_inact(' + o.id + ')"> Active </a>'
+              }
+              else {
+                return '<a class="btn btn-danger btn-sm text-white" role="button" title="Inactive"  onclick="status_fetch(' + o.id + ')" data-bs-toggle="modal" data-bs-target="#Modal4" >Inactive</a>'
+              }
+            } else {
+              return o.status;
+            }
+          }
+        },
+        { data: "candid_name" },
+        { data: "candid_no" },
+        { data: "acourse_id__cname" },
+        { data: "dat" },
+        { data: "Location" },
+        { data: "education" },
+        //   { data: "comp_year"},
+        //   { data: "parent_name"},
+        { data: "ph_num" },
+        //   { data: "al_ph_num"},
+        //   { data: "parent_ph_num"},
+        { data: "email" },
+        //   { data: "address"},
+        //   { data: "source"},
+        { data: "payment_type" },
+        { data: "payment_mode" },
+        //   { data: "remark"},
+        {
+          data: function (o) {
+            if (userRole == "Admin") {
+              return '<a class="btn btn-sm" title="edit" onclick="edit_enroll(' + o.id + ')" data-bs-toggle="modal" data-bs-target="#Modal2" >' + '<i class="fas fa-edit"></i>' + '</a><a class="btn   btn-sm"  title="delete" onclick="deleteid(' + o.id + ')">' + '<i class="fas fa-trash"></i>' + '</a>';
+            } else {
+              return '-';
+            }
+          }
+        }
+      ]
+    });
+    $('#myTable tbody').on('click', 'td.details-control', function () {
+      var tr = $(this).closest('tr');
+      var row = table.row(tr);
+
+      if (row.child.isShown()) {
+        row.child.hide();
+        tr.find('td.details-control .toggle-details').html('+');
+        // tr.removeClass('shown');
+      } else {
+        row.child(format(row.data())).show();
+        tr.find('td.details-control .toggle-details').html('-');
+        // tr.addClass('shown');
+      }
+    });
+
+  }
+
+  function table2() {
+    $('#myTable').dataTable().fnDestroy();
+    var userRole = "{{ request.session.role }}";
+    var cour = $('#courses').val();
+    var quali = $('#qualifis').val();
+    var loc = $('#loc').val();
+    table = $('#myTable').DataTable({
+      dom: 'Bfrtip',
+      "buttons": [
+        'copy', 'csv', 'excel', 'pdf', 'print'
+      ],
+      "language": {
+        "processing": "DataTables is currently busy"
+      },
+      scrollX: true,
+      responsive: true,
+      "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+        $("td:first", nRow).html(iDisplayIndex + 1);
+        return nRow;
+      },
+      "language": {
+        "paginate": {
+          "previous": '<i class="fa fa-angle-left" style="color:  #012970;"></i>',
+          "next": '<i class="fa fa-angle-right" style="color:  #012970;"></i>'
+        },
+      },
+      initComplete: function () {
+        $('#btn-place').html(table.buttons().container());
+      },
+      'ajax': {
+        url: '/enroll_fetch1',
+        processing: true,
+        type: 'POST',
+        dataSrc: "",
+        data: { 'cour': cour, 'quali': quali, 'loc': loc, csrfmiddlewaretoken: '{{ csrf_token }}' },
+        dataType: 'JSON',
+      },
+      'columns': [
+        { data: "id" },
+        {
+          data: function (o) {
+            if (userRole == "Admin") {
+              const d = new Date()
+              d.getMonth() - 2
+              var datestring = d.getFullYear() + "-0" + (d.getMonth() + 1) + "-" + d.getDate()
+              var dates = '2023-02-28';
+              if (o.blc_amnt != 0) {
+                return '<a  class="btn btn-success btn-sm text-white" title="pay" role="button" href="/pendding_page/' + o["id"] + '" >Collect cash</a>';
+              }
+              else {
+                return '<a  class="btn btn-success btn-sm text-white disabled" role="button" title="pay"  href="/enroll_form/' + o["id"] + '" >Collect cash</a>';
+              }
+            } else {
+              return '-';
+            }
+          }
+        },
+        {
+          data: function (o) {
+            return '<a class="btn btn-primary btn-sm text-white" role="button" title="History"  onclick="History_enroll(' + o.id + ')" data-bs-toggle="modal" data-bs-target="#Modal3" >History</a>'
+          }
+        },
+        {
+          data: function (o) {
+            if (userRole == "Admin") {
+              if (o.status == 'Active') {
+                return '<a class="btn btn-success btn-sm" role="button"  title="Active" onclick="update_status_inact(' + o.id + ')"> Active </a>'
+              }
+              else {
+                return '<a class="btn btn-danger btn-sm text-white" role="button" title="Inactive"  onclick="status_fetch(' + o.id + ')" data-bs-toggle="modal" data-bs-target="#Modal4" >Inactive</a>'
+              }
+            } else {
+              return o.status
+            }
+          }
+        },
+        { data: "candid_name" },
+        { data: "candid_no" },
+        { data: "acourse_id__cname" },
+        { data: "dat" },
+        { data: "Location" },
+        { data: "education" },
+        { data: "comp_year" },
+        { data: "parent_name" },
+        { data: "ph_num" },
+        { data: "al_ph_num" },
+        { data: "parent_ph_num" },
+        { data: "email" },
+        { data: "address" },
+        { data: "source" },
+        { data: "payment_type" },
+        { data: "payment_mode" },
+        { data: "remark" },
+        {
+          data: function (o) {
+            if (userRole == "Admin") {
+              return '<a class="btn btn-sm" title="edit" onclick="edit_enroll(' + o.id + ')" data-bs-toggle="modal" data-bs-target="#Modal2" >' + '<i class="fas fa-edit"></i>' + '</a><a class="btn   btn-sm"  title="delete" onclick="deleteid(' + o.id + ')">' + '<i class="fas fa-trash"></i>' + '</a>';
+            }
+            else {
+              return '-';
+            }
+          }
+        }
+      ]
+    });
+  }
+
+  function course() {
+    $.ajax({
+      url: "/fetch_course",
+      type: "POST",
+      data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
+      dataType: "JSON",
+      success: function (data) {
+        categdata = data.value
+        categdata1 = data.value1
+        var selOpts = "<option value='all'>ALL</option>";
+        for (i = 0; i < categdata.length; i++) {
+          var val = categdata[i];
+          var val_id = categdata1[i];
+          selOpts += "<option value='" + val_id + "'>" + val + "</option>";
+        }
+        $('#courses').append(selOpts);
+      }
+    });
+  }
+
+  function quali() {
+    var cour = $('#courses').val();
+    $('#qualifis').empty();
+    if (cour == 'all') {
+      $('#loc').empty();
+      var selOpts = '<option value="" disabled selected>Select Location</option>';
+      var selOpts1 = '<option value="" disabled selected>Select Qualification</option>';
+      $('#qualifis').append(selOpts1);
+      $('#loc').append(selOpts);
+      table1();
+    }
+    else {
+      $.ajax({
+        url: "/fetch_qualification",
+        type: "POST",
+        data: { 'cour': cour, csrfmiddlewaretoken: '{{ csrf_token }}' },
+        dataType: "JSON",
+        success: function (data) {
+          categdata = data
+          var selOpts = '<option value="" disabled selected>Select Qualification</option>';
+          for (i = 0; i < categdata.length; i++) {
+            var val = categdata[i];
+            selOpts += "<option value='" + val + "'>" + val + "</option>";
+          }
+          $('#qualifis').append(selOpts);
+        }
+      });
+    }
+  }
+
+  function loca() {
+    var cour = $('#courses').val();
+    var quali = $('#qualifis').val();
+    $('#loc').empty();
+    $.ajax({
+      url: "/fetch_location",
+      type: "POST",
+      data: { 'cour': cour, 'quali': quali, csrfmiddlewaretoken: '{{ csrf_token }}' },
+      dataType: "JSON",
+      success: function (data) {
+        categdata = data
+        var selOpts = '<option value="" disabled selected>Select Location</option>';
+        for (i = 0; i < categdata.length; i++) {
+          var val = categdata[i];
+          selOpts += "<option value='" + val + "'>" + val + "</option>";
+        }
+        $('#loc').append(selOpts);
+      }
+    });
+  }
+
+  function edit_enroll(id) {
+    $.ajax({
+      url: "/edit_enroll",
+      type: "POST",
+      data: { id: id, csrfmiddlewaretoken: '{{ csrf_token }}' },
+      dataType: "JSON",
+      success: function (data) {
+        $('#id1').val(data.user['id']);
+        $('#b1').html('<option value="' + data.user["Location"] + '"selected>' + data.user["Location"] + '</option>');
+        $('#d1').html('<option value="' + data.user["education"] + '"selected>' + data.user["education"] + '</option>');
+        $('#e1').val(data.user['comp_year']);
+        $('#f1').val(data.user['ph_num']);
+        $('#g1').val(data.user['al_ph_num']);
+        $('#j1').val(data.user['email']);
+        $('#k1').val(data.user['address']);
+        $('#l1').html('<option value="' + data.user["source"] + '"selected>' + data.user["source"] + '</option>');
+        $('#m1').val(data.user['payment_type']);
+        $('#n1').val(data.user['payment_mode']);
+        $('#o1').val(data.user['amount']);
+        $('#p1').val(data.user['remark']);
+        $('#c1').val(data.user['candid_name']);
+        $('#candid_no').val(data.user['candid_no']);
+        $('#h1').val(data.user['parent_name']);
+        $('#i1').val(data.user['parent_ph_num']);
+        $('#a1').html('<option value="' + data.user["course_id"] + '"selected>' + data.user["course_name"] + '</option>')
+        categdata = data.list_val
+        var selOpts = "";
+        for (i = 0; i < categdata.length; i++) {
+          var val = categdata[i];
+          var val_id = data.list_id[i]
+          selOpts += "<option value='" + val_id + "'>" + val + "</option>";
+          $('#a1').children('option[value= "' + val_id + '"]').css("display", "none");
+        }
+        $('#a1').append(selOpts);
+
+        //qualification
+        categdata1 = data.list_quali
+        var selOpts1 = "";
+        for (i = 0; i < categdata1.length; i++) {
+          var val = categdata1[i];
+          selOpts1 += "<option value='" + val + "'>" + val + "</option>";
+          $('#a1').children('option[value= "' + val + '"]').css("display", "none");
+        }
+        $('#d1').append(selOpts1);
+
+        //location
+        categdata3 = data.list_loc
+        var selOpts2 = "";
+        for (i = 0; i < categdata3.length; i++) {
+          var val = categdata3[i];
+          selOpts2 += "<option value='" + val + "'>" + val + "</option>";
+          $('#b1').children('option[value= "' + val + '"]').css("display", "none");
+        }
+        $('#b1').append(selOpts2);
+
+        //source
+        categdata4 = data.list_sources
+        var selOpts3 = "";
+        for (i = 0; i < categdata4.length; i++) {
+          var val = categdata4[i];
+          selOpts3 += "<option value='" + val + "'>" + val + "</option>";
+          $('#l1').children('option[value= "' + val + '"]').css("display", "none");
+        }
+        $('#l1').append(selOpts3);
+
+      }
+    });
+  }
+
+  //History fetch
+  function History_enroll(id) {
+    $.ajax({
+      url: "/History_enroll",
+      type: "POST",
+      data: { id: id, csrfmiddlewaretoken: '{{ csrf_token }}' },
+      dataType: "JSON",
+      success: function (data) {
+        if (data.msg1 == 'failed') {
+          $('#cname').html('');
+          $('#balance').html('');
+          $('#pay_tb').html('');
+          $('#price_dis').html('');
+          $('#discount').html('');
+        }
+        else {
+          $('#cname').html(data.user['candid_name']);
+          $('#balance').html(data.user['blc_amnt']);
+          $('#pay_tb').html(data.user1['pay']);
+          $('#price_dis').html(data.user['dis_price']);
+          if (data.user['discount'] == 'null') {
+            $('#discount').html('');
+          }
+          else {
+            $('#discount').html(data.user['discount'] + '%');
+          }
+          if (data.msg == 'valid') {
+            $('.d').show();
+          }
+          else {
+            $('.d').hide();
+          }
+        }
+      }
+    });
+  }
+
+  $('#update').click(function (e) {
+    $a1 = $('#a1').val();
+    $b1 = $('#b1').val();
+    $c1 = $('#c1').val();
+    $d1 = $('#d1').val();
+    $e1 = $('#e1').val();
+    $f1 = $('#f1').val();
+    $j1 = $('#j1').val();
+    $m1 = $('#m1').val();
+    $n1 = $('#n1').val();
+    candid_no = $('#candid_no').val();
+    if (!$('#a1').val() | !$('#b1').val() | $c1 == "" | !$('#d1').val() | $e1 == "" | $f1 == "" | $j1 == "" | !$('#m1').val() | !$('#n1').val() | candid_no == "") {
+      swal("Please complete all * field", "failed", { icon: 'error' });
+      // $('.c').show();
+    }
+    else {
+      e.preventDefault();
+      var formData = new FormData($('#formid2')[0]);
+      $.ajax({
+        url: "/update_enrollform",
+        method: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+          data1 = data.status
+          if (data1 == 'Success') {
+            swal("Your Details Updated Successfully!!", { icon: "success" });
+            $('#Modal2').modal('hide');
+            $(".modal-backdrop").remove();
+            table.ajax.reload();
+          }
+          else {
+            swal("Failed to Update!!", "failed", { icon: 'error' });
+          }
+        },
+        error: function (error) {
+          alert(' update fail ')
+        }
+      });
+    }
+
+  });
+
+  function deleteid(id) {
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover ",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+      .then((willDelete) => {
+        if (willDelete) {
+          $.ajax({
+            type: 'POST',
+            url: '/enq_delete',
+            data: { "id": id, csrfmiddlewaretoken: "{{ csrf_token }}" },
+            dataType: 'json',
+            success: function (data) {
+              swal("successfully deleted!", {
+                icon: "success",
+              });
+              table.ajax.reload()
+            }
+          })
+        }
+      });
+
+  }
+
+  function d() {
+    var payy = $('#m1').val();
+    var a = 3000;
+    var b = 15000;
+    if (payy == 'Monthly Payment') {
+      $('#o1').val(a);
+    }
+    else {
+      $('#o1').val(b);
+    }
+  }
+
+  function status_fetch(id) {
+    $.ajax({
+      url: "/status_fetch",
+      type: "POST",
+      data: { id: id, csrfmiddlewaretoken: '{{ csrf_token }}' },
+      dataType: "JSON",
+      success: function (data) {
+        $('#can_name').html(data.user['candid_name'])
+        $('#inact_date').html(data.user['inactive_dat'])
+        $('#inact_date').html(data.user['inactive_dat'])
+        $('#st_id').html(data.user['id'])
+
+
+      }
+    });
+  }
+
+
+  function update_status_inact(id) {
+    swal({
+      title: "Do You Want To Change the Status to Inactive?",
+      buttons: ["Cancel", "Inactive"],
+      dangerMode: true,
+    })
+      .then((willDelete) => {
+        if (willDelete) {
+          $.ajax({
+            type: 'POST',
+            url: '/chng_inactive',
+            data: { "id": id, csrfmiddlewaretoken: "{{ csrf_token }}" },
+            dataType: 'json',
+            success: function (data) {
+              table.ajax.reload()
+            }
+          })
+        }
+      });
+
+  }
+
+  function update_status_act() {
+    var id = $('#st_id').text()
+    $.ajax({
+      type: 'POST',
+      url: '/chng_active',
+      data: { "id": id, csrfmiddlewaretoken: "{{ csrf_token }}" },
+      dataType: 'json',
+      success: function (data) {
+        $('#Modal4').modal('hide');
+        $(".modal-backdrop").remove();
+        table.ajax.reload()
+      }
+    })
+  };
+
+</script>
+
+</html>

@@ -1,0 +1,294 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Enrollment</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <link href="{% static 'asset/assets/img/CK-Edge-logo.png' %}" rel="icon">
+  <link href="{% static 'asset/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/quill/quill.snow.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
+  <link href="{% static 'asset/assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <!-- <link href="{% static 'asset/assets/vendor/simple-datatables/style.css' %}" rel="stylesheet"> -->
+  <link href="{% static 'asset/assets/css/style.css' %}" rel="stylesheet">
+
+
+
+</head>
+  <style>
+
+   tfoot {
+     display: table-header-group;
+}
+    #footbottom{
+      min-height:100vh !important ;
+      display:flex !important ;
+      flex-direction:column !important ;
+      justify-content:space-between !important ;
+    }
+    .co{
+      color:#012970
+    }
+    *{
+      font-size:small !important;
+    }
+ </style>
+</head>
+
+<body>
+   <div id="footbottom">
+  <!-- ======= Header ======= -->
+  {% include 'include/header.html'%}
+
+  <!-- ======= Sidebar ======= -->
+  {% include 'include/sidebar.html'%}
+  <!-- End Sidebar-->
+
+  <main id="main" class="main" >
+<!-- End Page Title -->
+<div  >
+      <!--add emp form-->
+      <div class="modal fade" id="Modal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Enrollment</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body"  >
+                <form id="formid1"  data-toggle="validator"  >{% csrf_token %}
+                    <div class="row">
+                        <div class="mb-3 col-md-12">
+                        <label for="inputState" class="form-label  fw-bold">Qualification<span class="text-danger"> *</span></label>
+                        <input type="text" class="form-control" id="quali"  aria-describedby="emailHelp" name="quali"  >
+                        <input type="hidden" class="form-control" id="id1"  aria-describedby="emailHelp" name="id"  >
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-md-12">
+                        <label for="exampleInputEmail1" class="form-label fw-bold">Remark</label>
+                        <input type="text"  class="form-control" id="remark" rows="1" aria-describedby="emailHelp" name="remark">
+                        </div>
+                    </div>
+                    <div class="alert alert-success alert-dismissible fade show w-25 " id="alert1" style="display:none;" role="alert" >
+                        <i class="bi bi-check-circle me-1 "></i>
+                        successfully added!
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <div class="col-md-12">
+                        <input type="button" id="update" class="btn btn-primary mt-5" value="Update">
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+
+
+
+      <!--end-->
+     <!--card -->
+     <div >
+    <div class="card col-md-12" >
+        <div class="card-body" style="box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;">
+          <div class="row">
+            <div class="col-md-8"> <h5 class="fw-bold mt-2" style="color:#012970">Qualification</h5></div>
+            {% if request.session.role == "Admin" %}
+            <div class="col-md-4"> <a  href="/add_quali"  ><button class="btn btn-success mt-2 border float-end mb-2 " id="save"  type="submit">Add Qualification</button></a></div>
+            <!-- <div class="col-md-2"></div> -->
+            {% endif %}
+          </div>
+          <div class="table-responsive my-2">
+
+            <form enctype="multipart/form-data">{% csrf_token %}
+
+            <table class="table table-hover table-striped " data-order='[[ 0, "desc" ]]'  id="myTable">
+              <thead>
+                <tr  >
+                  <th scope="col">#</th>
+                  <th scope="col">Qualification</th>
+                  <th scope="col">Remark</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+
+              </tbody>
+            </table>
+        </form>
+         </div>
+        </div>
+      </div>
+    </div>
+
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  {% include 'include/footer.html'%}
+  <!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'asset/assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/chart.js/chart.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/echarts/echarts.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/quill/quill.min.js' %}"></script>
+  <!-- <script src="{% static 'asset/assets/vendor/simple-datatables/simple-datatables.js' %}"></script> -->
+  <script src="{% static 'asset/assets/vendor/tinymce/tinymce.min.js' %}"></script>
+  <script src="{% static 'asset/assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'asset/assets/js/main.js' %}"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css"> -->
+  <!-- <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js" defer></script> -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css"  href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" type="text/css"  href="https://cdn.datatables.net/buttons/1.4.0/css/buttons.dataTables.min.css" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/pdfmake.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.4.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.4.0/js/buttons.flash.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.4.0/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.4.0/js/buttons.print.min.js"></script>
+
+</div>
+</body>
+<script>
+$(document).ready(function(){
+  var pathname = window.location.pathname;
+  var userRole = "{{ request.session.role }}";
+  $('.nav-item> a[href="'+pathname+'"]').removeClass('collapsed');
+    table=$('#myTable').DataTable({
+        "language": {
+            "processing": "DataTables is currently busy"
+        },
+        // scrollX: true,
+        responsive: true,
+        "fnRowCallback" : function(nRow, aData, iDisplayIndex){
+            $("td:first", nRow).html(iDisplayIndex +1);
+            return nRow;
+        },
+        "language": {"paginate": {
+            "previous": '<i class="fa fa-angle-left" style="color:  #012970;"></i>',
+            "next": '<i class="fa fa-angle-right" style="color:  #012970;"></i>'
+            },
+        },
+        'ajax':{
+            url:'/quali_fetch',
+            processing: true,
+            type :'POST',
+            dataSrc:"",
+            data:{
+            csrfmiddlewaretoken:'{{ csrf_token }}'
+            },
+            dataType:'JSON',
+            },
+        'columns':[
+        { data: "id"},
+        { data: "qualification"},
+        { data: "remark"},
+        {data: function(o) {
+           if(userRole == "Admin"){
+            return '<a class="btn btn-sm" title="edit" onclick="edit_quali('+o.id+')" data-bs-toggle="modal" data-bs-target="#Modal2" >' + '<i class="fas fa-edit"></i>' + '</a><a class="btn   btn-sm"  title="delete" onclick="deleteid('+o.id+')">' + '<i class="fas fa-trash"></i>' + '</a>';
+           }else{
+            return '-';
+           }
+        }}
+        ]
+    });
+});
+
+function edit_quali(id){
+    $.ajax({
+        url:"/edit_quali",
+        type:"POST",
+        data:{id:id, csrfmiddlewaretoken:'{{ csrf_token }}'},
+        dataType:"JSON",
+        success:function(data){
+              $('#id1').val(data.user['id']);
+              $('#quali').val(data.user['qualification']);
+              $('#remark').val(data.user['remark']);
+        }
+    });
+}
+
+
+$('#update').click(function(e){
+    var quali = $('#quali').val();
+    if( quali=="")
+    {
+        swal("Please filled required(*) field",{icon: 'error'});
+    }
+    else
+    {
+      var formData=new FormData($('#formid2')[0]);
+      $.ajax({
+        url:"/update_quali",
+        method:"POST",
+        data:$('#formid1').serialize(),
+        success:function(data){
+            data1=data.status
+            if(data1=='Success'){
+                swal("Your Record Updated Successfully!!",{icon:"success"});
+                $('#Modal2').modal('hide');
+                $(".modal-backdrop").remove();
+                table.ajax.reload();
+            }
+            else
+            {
+                swal("Your Record failed to update!!",{icon: 'error'});
+            }
+        },
+        error:function(error){
+          alert(' update fail ')
+        }
+      });
+    }
+});
+
+function deleteid(id){
+  swal({
+  title: "Are you sure?",
+  text: "Once deleted, you will not be able to recover ",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+    })
+    .then((willDelete) => {
+        if (willDelete) {
+            $.ajax({
+                type:'POST',
+                url:'/delete_quali',
+                data:{"id":id,csrfmiddlewaretoken:"{{ csrf_token }}"},
+                dataType:'json',
+                success:function(data){
+                    swal("successfully deleted!", {
+                    icon: "success", });
+                    table.ajax.reload();
+                }
+        });
+       }
+    });
+}
+</script>
+</html>

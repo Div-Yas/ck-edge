@@ -1,0 +1,57 @@
+{% load static %}
+<aside id="sidebar" class="sidebar" >
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+<!-- End Dashboard Nav -->
+<!-- End Components Nav -->
+      <!-- <li class="nav-heading">CK EDGE</li> -->
+
+      {% if request.session.role == "Admin" %}
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/index">
+          <i class="bi bi-person"></i>
+          <span>Enquiries</span>
+        </a>
+      </li>
+      {% endif %}
+
+      <li class="nav-item">
+        <a class="nav-link collapsed " href="/enroll">
+          <i class="bi bi-grid"></i>
+          <span>Enrollment</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed"  href="/addcourse_page">
+          <i class="bi bi-card-list"></i>
+          <span>Course</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed"  href="/qualification">
+          <i class="bx bx-book-reader"></i>
+          <span>Qualification</span>
+        </a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link collapsed"  href="/source">
+          <i class="bi bi-grid-1x2-fill"></i>
+          <span>Source</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed"  href="/location">
+          <i class="bx bx-map"></i>
+          <span>Location</span>
+        </a>
+      </li>
+      <!-- End Dashboard Nav style="width: 200px !important;" -->
+
+      <!-- End Components Nav -->
+
+  <!-- End Profile Page Nav -->
+<!-- End Login Page Nav -->
+
+    </ul>
+
+  </aside>
